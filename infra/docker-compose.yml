@@ -1,0 +1,43 @@
+services:
+  mongo:
+    image: mongo:7
+    ports: ["27017:27017"]
+    volumes: ["mongo-data:/data/db"]
+  postgres:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_DB: geobook
+      POSTGRES_USER: geobook
+      POSTGRES_PASSWORD: geobook
+    ports: ["5432:5432"]
+    volumes: ["postgres-data:/var/lib/postgresql/data", "../services/api/sql:/docker-entrypoint-initdb.d"]
+  zookeeper:
+    image: bitnami/zookeeper:3.9
+    environment: { ALLOW_ANONYMOUS_LOGIN: "yes" }
+  kafka:
+    image: bitnami/kafka:3.7
+    depends_on: [zookeeper]
+    ports: ["9092:9092"]
+    environment:
+      KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_CFG_LISTENERS: PLAINTEXT://:9092
+      KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      ALLOW_PLAINTEXT_LISTENER: "yes"
+  api:
+    build: ../services/api
+    depends_on: [mongo, postgres, kafka]
+    ports: ["4000:4000"]
+    environment:
+      PORT: 4000
+      MAPBOX_TOKEN: ${MAPBOX_TOKEN:-}
+      MONGO_URL: mongodb://mongo:27017/geobook
+      DATABASE_URL: postgres://geobook:geobook@postgres:5432/geobook
+      KAFKA_BROKERS: kafka:9092
+      JWT_SECRET: local-development-secret
+  worker:
+    build: ../services/worker
+    depends_on: [kafka]
+    environment: { KAFKA_BROKERS: kafka:9092 }
+volumes:
+  mongo-data:
+  postgres-data:

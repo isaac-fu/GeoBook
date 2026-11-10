@@ -1,0 +1,3 @@
+CREATE EXTENSION IF NOT EXISTS btree_gist;
+CREATE TABLE IF NOT EXISTS users (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), email TEXT UNIQUE NOT NULL, password_hash TEXT NOT NULL, role TEXT NOT NULL DEFAULT 'guest', created_at TIMESTAMPTZ NOT NULL DEFAULT now());
+CREATE TABLE IF NOT EXISTS bookings (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), user_id UUID NOT NULL REFERENCES users(id), hotel_id TEXT NOT NULL, room_id TEXT NOT NULL, stay DATERANGE NOT NULL, status TEXT NOT NULL DEFAULT 'confirmed', total_cents INTEGER NOT NULL, created_at TIMESTAMPTZ NOT NULL DEFAULT now(), EXCLUDE USING gist (room_id WITH =, stay WITH &&) WHERE (status = 'confirmed'));

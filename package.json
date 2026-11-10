@@ -1,0 +1,13 @@
+{
+  "name": "geobook",
+  "private": true,
+  "workspaces": ["apps/*", "services/*"],
+  "scripts": {
+    "dev:guest": "npm --workspace apps/guest-web run dev",
+    "dev:hotel": "npm --workspace apps/hotel-web run dev",
+    "dev:admin": "npm --workspace apps/admin-web run dev",
+    "dev:api": "npm --workspace services/api run dev",
+    "dev:worker": "npm --workspace services/worker run dev",
+    "build": "npm run build --workspaces"
+  }
+}
