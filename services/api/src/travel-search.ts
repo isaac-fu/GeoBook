@@ -15,6 +15,7 @@ const schema = z.object({
   sortBy: z.enum(['duration', 'distance']).default('duration'),
   minPrice: z.number().nonnegative().default(0),
   maxPrice: z.number().nonnegative().default(100000),
+  includeUnpriced: z.boolean().default(false),
   limit: z.number().int().min(1).max(100).default(20),
 }).refine(q => q.minPrice <= q.maxPrice && q.ringsMinutes.at(-1) === q.maxMinutes &&
   q.ringsMinutes.every((n, i, a) => i === 0 || n > a[i - 1]),
@@ -34,7 +35,8 @@ export function registerTravelSearch(app: Express, mongo: MongoClient) {
       for (const mode of query.modes) contours[mode] = await routing.contours(query.anchor, mode, query.ringsMinutes);
       const collection = mongo.db('geobook').collection('hotels');
       await collection.createIndex({ location: '2dsphere' });
-      const filter = { $and: [spatialFilter(contours, query), { priceFrom: { $gte: query.minPrice, $lte: query.maxPrice } }, { 'location.type': 'Point' }] };
+      const priceFilter = { priceFrom: { $gte: query.minPrice, $lte: query.maxPrice } };
+      const filter = { $and: [spatialFilter(contours, query), query.includeUnpriced ? { $or: [priceFilter, { priceFrom: null }] } : priceFilter, { 'location.type': 'Point', active: { $ne: false } }] };
       // Reject oversized searches rather than silently returning an incomplete ranking.
       const hotels = await collection.find(filter).sort({ _id: 1 }).limit(121).toArray() as unknown as Hotel[];
       if (hotels.length > 120) {

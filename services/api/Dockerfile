@@ -1,6 +1,13 @@
 FROM node:22-alpine
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-CMD ["npm", "run", "dev"]
+COPY package.json package-lock.json ./
+COPY apps/guest-web/package.json ./apps/guest-web/package.json
+COPY apps/hotel-web/package.json ./apps/hotel-web/package.json
+COPY apps/admin-web/package.json ./apps/admin-web/package.json
+COPY services/api/package.json ./services/api/package.json
+COPY services/worker/package.json ./services/worker/package.json
+RUN npm ci --workspace services/api --include-workspace-root=false
+COPY services/api ./services/api
+WORKDIR /app/services/api
+RUN npm run build
+CMD ["node", "dist/server.js"]

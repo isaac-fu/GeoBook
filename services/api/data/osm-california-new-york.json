@@ -1,0 +1,2582 @@
+[
+  {
+    "_id": "osm:node:529780287",
+    "name": "Coast Hotel",
+    "city": "San Francisco",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -122.4133559,
+        37.7858845
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/529780287",
+      "url": "https://www.openstreetmap.org/node/529780287",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:03:59.991Z"
+    }
+  },
+  {
+    "_id": "osm:node:769361407",
+    "name": "Hotel Abri",
+    "city": "San Francisco",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "127 Ellis Street 94102",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -122.4083668,
+        37.7851927
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/769361407",
+      "url": "https://www.openstreetmap.org/node/769361407",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:03:59.993Z"
+    }
+  },
+  {
+    "_id": "osm:node:924624361",
+    "name": "Hotel Union Square",
+    "city": "San Francisco",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -122.407741,
+        37.785799
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/924624361",
+      "url": "https://www.openstreetmap.org/node/924624361",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:03:59.993Z"
+    }
+  },
+  {
+    "_id": "osm:node:944758375",
+    "name": "The Andrews Hotel",
+    "city": "San Francisco",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "624 Post Street 94109",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -122.412263,
+        37.7879207
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/944758375",
+      "url": "https://www.openstreetmap.org/node/944758375",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:03:59.993Z"
+    }
+  },
+  {
+    "_id": "osm:node:973620751",
+    "name": "Herbert Hotel",
+    "city": "San Francisco",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "161 Powell Street",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -122.4081436,
+        37.7862332
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/973620751",
+      "url": "https://www.openstreetmap.org/node/973620751",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:03:59.993Z"
+    }
+  },
+  {
+    "_id": "osm:node:1229745496",
+    "name": "Sunnyside Hotel",
+    "city": "San Francisco",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "135 6th Street 94103",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -122.407985,
+        37.78056
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/1229745496",
+      "url": "https://www.openstreetmap.org/node/1229745496",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:03:59.993Z"
+    }
+  },
+  {
+    "_id": "osm:node:1232832490",
+    "name": "Courtyard",
+    "city": "San Francisco",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "1050 Van Ness Avenue 94109",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -122.4210781,
+        37.7854586
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/1232832490",
+      "url": "https://www.openstreetmap.org/node/1232832490",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:03:59.993Z"
+    }
+  },
+  {
+    "_id": "osm:node:1680933521",
+    "name": "The Fitzgerald Hotel",
+    "city": "San Francisco",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "620 Post Street 94109",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -122.412121,
+        37.7879379
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/1680933521",
+      "url": "https://www.openstreetmap.org/node/1680933521",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:03:59.993Z"
+    }
+  },
+  {
+    "_id": "osm:node:2391836468",
+    "name": "Mayflower Hotel",
+    "city": "San Francisco",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "975 Bush Street",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -122.4132914,
+        37.7894823
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/2391836468",
+      "url": "https://www.openstreetmap.org/node/2391836468",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:03:59.993Z"
+    }
+  },
+  {
+    "_id": "osm:node:2499498547",
+    "name": "Handlery Union Square Hotel",
+    "city": "San Francisco",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "351 Geary Street 94102",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -122.4090794,
+        37.7871536
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/2499498547",
+      "url": "https://www.openstreetmap.org/node/2499498547",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:03:59.993Z"
+    }
+  },
+  {
+    "_id": "osm:node:2898443201",
+    "name": "Inn at Market",
+    "city": "San Francisco",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "1412 Market Street",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -122.4181543,
+        37.7763133
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/2898443201",
+      "url": "https://www.openstreetmap.org/node/2898443201",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:03:59.993Z"
+    }
+  },
+  {
+    "_id": "osm:node:2986678150",
+    "name": "Staypineapple An Elegant Hotel",
+    "city": "San Francisco",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -122.4129683,
+        37.7868795
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/2986678150",
+      "url": "https://www.openstreetmap.org/node/2986678150",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:03:59.993Z"
+    }
+  },
+  {
+    "_id": "osm:node:3396652935",
+    "name": "Hotel Zelos San Francisco",
+    "city": "San Francisco",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "12 4th Street 94103",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -122.4055,
+        37.7852861
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/3396652935",
+      "url": "https://www.openstreetmap.org/node/3396652935",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:03:59.993Z"
+    }
+  },
+  {
+    "_id": "osm:node:3399173220",
+    "name": "Pontiac Hotel",
+    "city": "San Francisco",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "509 Minna Street 94103",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -122.4083487,
+        37.7803615
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/3399173220",
+      "url": "https://www.openstreetmap.org/node/3399173220",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:03:59.993Z"
+    }
+  },
+  {
+    "_id": "osm:node:3455075367",
+    "name": "The St. Regis San Francisco",
+    "city": "San Francisco",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "125 3rd Street 94103",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -122.401381,
+        37.7860572
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/3455075367",
+      "url": "https://www.openstreetmap.org/node/3455075367",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:03:59.993Z"
+    }
+  },
+  {
+    "_id": "osm:node:3648686272",
+    "name": "Hotel Shahil",
+    "city": "San Francisco",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "664 Larkin Street 94109",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -122.4175274,
+        37.7839462
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/3648686272",
+      "url": "https://www.openstreetmap.org/node/3648686272",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:03:59.993Z"
+    }
+  },
+  {
+    "_id": "osm:node:4625148825",
+    "name": "Hotel Epik",
+    "city": "San Francisco",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "706 Polk Street 94109",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -122.41907,
+        37.7834542
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/4625148825",
+      "url": "https://www.openstreetmap.org/node/4625148825",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:03:59.993Z"
+    }
+  },
+  {
+    "_id": "osm:node:4625185532",
+    "name": "The Regency Inn",
+    "city": "San Francisco",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -122.416989,
+        37.7832049
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/4625185532",
+      "url": "https://www.openstreetmap.org/node/4625185532",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:03:59.993Z"
+    }
+  },
+  {
+    "_id": "osm:node:4628353541",
+    "name": "Hotel Astoria",
+    "city": "San Francisco",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -122.4058674,
+        37.7906389
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/4628353541",
+      "url": "https://www.openstreetmap.org/node/4628353541",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:03:59.993Z"
+    }
+  },
+  {
+    "_id": "osm:node:4637572303",
+    "name": "The Crosby on O' Farrell",
+    "city": "San Francisco",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -122.4131826,
+        37.7859693
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/4637572303",
+      "url": "https://www.openstreetmap.org/node/4637572303",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:03:59.993Z"
+    }
+  },
+  {
+    "_id": "osm:node:6486232371",
+    "name": "Freehand Los Angeles",
+    "city": "Los Angeles",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "416 West 8th Street 90014",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -118.2567592,
+        34.0448734
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/6486232371",
+      "url": "https://www.openstreetmap.org/node/6486232371",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:13.645Z"
+    }
+  },
+  {
+    "_id": "osm:node:6486255301",
+    "name": "Hotel Per La, Autograph Collection",
+    "city": "Los Angeles",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "649 South Olive Street 90014",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -118.255517,
+        34.046847
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/6486255301",
+      "url": "https://www.openstreetmap.org/node/6486255301",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:13.648Z"
+    }
+  },
+  {
+    "_id": "osm:node:6486380556",
+    "name": "Courtyard",
+    "city": "Los Angeles",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "901 West Olympic Boulevard",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -118.265787,
+        34.0457869
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/6486380556",
+      "url": "https://www.openstreetmap.org/node/6486380556",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:13.648Z"
+    }
+  },
+  {
+    "_id": "osm:node:6486385982",
+    "name": "JW Marriott Los Angeles L.A. Live",
+    "city": "Los Angeles",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "900 West Olympic Boulevard 90015",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -118.266482,
+        34.0452979
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/6486385982",
+      "url": "https://www.openstreetmap.org/node/6486385982",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:13.648Z"
+    }
+  },
+  {
+    "_id": "osm:node:6486400675",
+    "name": "Tuck Hotel",
+    "city": "Los Angeles",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "820 South Spring Street 90014",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -118.2539737,
+        34.0425115
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/6486400675",
+      "url": "https://www.openstreetmap.org/node/6486400675",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:13.648Z"
+    }
+  },
+  {
+    "_id": "osm:node:8369844542",
+    "name": "Residence Inn",
+    "city": "Los Angeles",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "901 West Olympic Boulevard 90015",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -118.265659,
+        34.0459839
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/8369844542",
+      "url": "https://www.openstreetmap.org/node/8369844542",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:13.648Z"
+    }
+  },
+  {
+    "_id": "osm:node:9370691870",
+    "name": "Sheraton Grand Los Angeles",
+    "city": "Los Angeles",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "711 South Hope Street 90017",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -118.2583016,
+        34.0477069
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/9370691870",
+      "url": "https://www.openstreetmap.org/node/9370691870",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:13.648Z"
+    }
+  },
+  {
+    "_id": "osm:node:9956137767",
+    "name": "InterContinental Los Angeles Downtown",
+    "city": "Los Angeles",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "900 Wilshire Boulevard 90017",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -118.2600358,
+        34.0500222
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/9956137767",
+      "url": "https://www.openstreetmap.org/node/9956137767",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:13.648Z"
+    }
+  },
+  {
+    "_id": "osm:node:9986845079",
+    "name": "Los Angeles Athletic Club",
+    "city": "Los Angeles",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "431 West Seventh Street 90014",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -118.25513,
+        34.0465524
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/9986845079",
+      "url": "https://www.openstreetmap.org/node/9986845079",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:13.648Z"
+    }
+  },
+  {
+    "_id": "osm:node:10129049746",
+    "name": "Conrad Los Angeles Hotel",
+    "city": "Los Angeles",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -118.2485056,
+        34.0551379
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/10129049746",
+      "url": "https://www.openstreetmap.org/node/10129049746",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:13.648Z"
+    }
+  },
+  {
+    "_id": "osm:node:12108713271",
+    "name": "Moxy",
+    "city": "Los Angeles",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -118.2674897,
+        34.0406639
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/12108713271",
+      "url": "https://www.openstreetmap.org/node/12108713271",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:13.648Z"
+    }
+  },
+  {
+    "_id": "osm:node:12108713272",
+    "name": "AC Hotel",
+    "city": "Los Angeles",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -118.2672406,
+        34.0409131
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/12108713272",
+      "url": "https://www.openstreetmap.org/node/12108713272",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:13.648Z"
+    }
+  },
+  {
+    "_id": "osm:node:12897377401",
+    "name": "The Delphi Hotel Downtown LA",
+    "city": "Los Angeles",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "550 South Flower Street 90071",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -118.2570911,
+        34.0502292
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/12897377401",
+      "url": "https://www.openstreetmap.org/node/12897377401",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:13.648Z"
+    }
+  },
+  {
+    "_id": "osm:node:13694101009",
+    "name": "STILE Downtown Los Angeles by Kasa",
+    "city": "Los Angeles",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "929 South Broadway 90013",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -118.257018,
+        34.041831
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/13694101009",
+      "url": "https://www.openstreetmap.org/node/13694101009",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:13.648Z"
+    }
+  },
+  {
+    "_id": "osm:way:33528271",
+    "name": "Westin Bonaventure",
+    "city": "Los Angeles",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -118.255853,
+        34.0527577
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/33528271",
+      "url": "https://www.openstreetmap.org/way/33528271",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:13.648Z"
+    }
+  },
+  {
+    "_id": "osm:way:419974973",
+    "name": "Holiday Inn Express",
+    "city": "Los Angeles",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "611 South Westlake Avenue 90057",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -118.2742329,
+        34.0587035
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/419974973",
+      "url": "https://www.openstreetmap.org/way/419974973",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:13.648Z"
+    }
+  },
+  {
+    "_id": "osm:way:426254711",
+    "name": "Central Lake Hotel",
+    "city": "Los Angeles",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "1906 West 3rd Street 90057",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -118.2707972,
+        34.0615821
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/426254711",
+      "url": "https://www.openstreetmap.org/way/426254711",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:13.648Z"
+    }
+  },
+  {
+    "_id": "osm:way:426255093",
+    "name": "Cameo Hotel",
+    "city": "Los Angeles",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -118.2716681,
+        34.0590281
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/426255093",
+      "url": "https://www.openstreetmap.org/way/426255093",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:13.648Z"
+    }
+  },
+  {
+    "_id": "osm:way:426709281",
+    "name": "Hotel Solaire",
+    "city": "Los Angeles",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "1710 West 7th Street 90017",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -118.2728617,
+        34.0541558
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/426709281",
+      "url": "https://www.openstreetmap.org/way/426709281",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:13.648Z"
+    }
+  },
+  {
+    "_id": "osm:way:426709640",
+    "name": "The Mayfair Hotel",
+    "city": "Los Angeles",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "1256 West 7th Street 90017",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -118.2678533,
+        34.0518233
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/426709640",
+      "url": "https://www.openstreetmap.org/way/426709640",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:13.649Z"
+    }
+  },
+  {
+    "_id": "osm:node:4044455278",
+    "name": "Residence Inn San Diego Downtown/Bayfront",
+    "city": "San Diego",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "900 Bayfront Court 92101",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -117.172031,
+        32.716881
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/4044455278",
+      "url": "https://www.openstreetmap.org/node/4044455278",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:19.584Z"
+    }
+  },
+  {
+    "_id": "osm:node:4114506314",
+    "name": "SpringHill Suites San Diego Downtown/Bayfront",
+    "city": "San Diego",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "900 Bayfront Court 92101",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -117.17178,
+        32.7168861
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/4114506314",
+      "url": "https://www.openstreetmap.org/node/4114506314",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:19.587Z"
+    }
+  },
+  {
+    "_id": "osm:node:9215079106",
+    "name": "Pacifica Hotel",
+    "city": "San Diego",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "551 4th Avenue 92101",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -117.1608858,
+        32.7110948
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/9215079106",
+      "url": "https://www.openstreetmap.org/node/9215079106",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:19.587Z"
+    }
+  },
+  {
+    "_id": "osm:node:9215079108",
+    "name": "Gaslamp Quarter Hotel",
+    "city": "San Diego",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "417 Market Street 92101",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -117.1607626,
+        32.7113426
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/9215079108",
+      "url": "https://www.openstreetmap.org/node/9215079108",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:19.587Z"
+    }
+  },
+  {
+    "_id": "osm:node:14125620860",
+    "name": "Hilton San Diego Bayfront",
+    "city": "San Diego",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "1 Park Boulevard 92101",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -117.1583859,
+        32.7036893
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/14125620860",
+      "url": "https://www.openstreetmap.org/node/14125620860",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:19.587Z"
+    }
+  },
+  {
+    "_id": "osm:way:26748231",
+    "name": "Embassy Suites San Diego Bay Downtown",
+    "city": "San Diego",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "601 Pacific Highway 92101",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -117.1705173,
+        32.7120332
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/26748231",
+      "url": "https://www.openstreetmap.org/way/26748231",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:19.587Z"
+    }
+  },
+  {
+    "_id": "osm:way:30407584",
+    "name": "Hampton Inn San Diego - Downtown",
+    "city": "San Diego",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "1531 Pacific Highway 92101",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -117.1705308,
+        32.7212927
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/30407584",
+      "url": "https://www.openstreetmap.org/way/30407584",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:19.587Z"
+    }
+  },
+  {
+    "_id": "osm:way:30407624",
+    "name": "Pacific Inn Hotel & Suites",
+    "city": "San Diego",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -117.1706162,
+        32.7226661
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/30407624",
+      "url": "https://www.openstreetmap.org/way/30407624",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:19.587Z"
+    }
+  },
+  {
+    "_id": "osm:way:30407717",
+    "name": "Residence Inn San Diego Downtown",
+    "city": "San Diego",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "1747 Pacific Highway 92101",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -117.1706725,
+        32.7233963
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/30407717",
+      "url": "https://www.openstreetmap.org/way/30407717",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:19.587Z"
+    }
+  },
+  {
+    "_id": "osm:way:30929700",
+    "name": "Manchester Grand Hyatt San Diego",
+    "city": "San Diego",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "1 Market Place 92101",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -117.1678917,
+        32.7099198
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/30929700",
+      "url": "https://www.openstreetmap.org/way/30929700",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:19.587Z"
+    }
+  },
+  {
+    "_id": "osm:way:30929815",
+    "name": "Omni San Diego Hotel",
+    "city": "San Diego",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "675 L Street 92101",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -117.1587675,
+        32.7068638
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/30929815",
+      "url": "https://www.openstreetmap.org/way/30929815",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:19.587Z"
+    }
+  },
+  {
+    "_id": "osm:way:31429990",
+    "name": "The US Grant, A Luxury Collection Hotel",
+    "city": "San Diego",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "326 Broadway 92101",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -117.1615144,
+        32.7160776
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/31429990",
+      "url": "https://www.openstreetmap.org/way/31429990",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:19.587Z"
+    }
+  },
+  {
+    "_id": "osm:way:31557331",
+    "name": "San Diego Marriott Marquis & Marina",
+    "city": "San Diego",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "333 West Harbor Drive 92101",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -117.1656866,
+        32.7081006
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/31557331",
+      "url": "https://www.openstreetmap.org/way/31557331",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:19.587Z"
+    }
+  },
+  {
+    "_id": "osm:way:31807020",
+    "name": "Townplace Suites",
+    "city": "San Diego",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "1445 6th Avenue 92101",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -117.158997,
+        32.7205188
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/31807020",
+      "url": "https://www.openstreetmap.org/way/31807020",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:19.587Z"
+    }
+  },
+  {
+    "_id": "osm:way:31807464",
+    "name": "AC Hotel by Marriott San Diego Downtown Gaslamp Quarter",
+    "city": "San Diego",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "743 5th Avenue 92101",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -117.1596809,
+        32.7131296
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/31807464",
+      "url": "https://www.openstreetmap.org/way/31807464",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:19.587Z"
+    }
+  },
+  {
+    "_id": "osm:way:31807985",
+    "name": "The Keating Hotel",
+    "city": "San Diego",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "432 F Street 92101",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -117.1604236,
+        32.7138334
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/31807985",
+      "url": "https://www.openstreetmap.org/way/31807985",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:19.587Z"
+    }
+  },
+  {
+    "_id": "osm:way:31809858",
+    "name": "Courtyard San Diego Gaslamp/Convention Center",
+    "city": "San Diego",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "453 6th Avenue 92101",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -117.1589111,
+        32.7101219
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/31809858",
+      "url": "https://www.openstreetmap.org/way/31809858",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:19.587Z"
+    }
+  },
+  {
+    "_id": "osm:way:31843343",
+    "name": "ITH Eco Farm House San Diego",
+    "city": "San Diego",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -117.1658623,
+        32.7222769
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/31843343",
+      "url": "https://www.openstreetmap.org/way/31843343",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:19.587Z"
+    }
+  },
+  {
+    "_id": "osm:way:31846126",
+    "name": "Panama-Senator Hotel",
+    "city": "San Diego",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -117.1641036,
+        32.7134214
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/31846126",
+      "url": "https://www.openstreetmap.org/way/31846126",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:19.587Z"
+    }
+  },
+  {
+    "_id": "osm:way:32502243",
+    "name": "Wyndham Harbour Lights",
+    "city": "San Diego",
+    "province": "California",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "915 5th Avenue 92101",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -117.1598555,
+        32.7150008
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/32502243",
+      "url": "https://www.openstreetmap.org/way/32502243",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:19.587Z"
+    }
+  },
+  {
+    "_id": "osm:node:4437321217",
+    "name": "Hilton Garden Inn",
+    "city": "Buffalo",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "10 Lafayette Square 14203",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -78.8738339,
+        42.8861791
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/4437321217",
+      "url": "https://www.openstreetmap.org/node/4437321217",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:25.629Z"
+    }
+  },
+  {
+    "_id": "osm:node:7059003095",
+    "name": "Hyatt Regency Buffalo",
+    "city": "Buffalo",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "2 Fountain Plaza 14202",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -78.8740585,
+        42.8882431
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/7059003095",
+      "url": "https://www.openstreetmap.org/node/7059003095",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:25.631Z"
+    }
+  },
+  {
+    "_id": "osm:node:9817704919",
+    "name": "Curtiss Hotel",
+    "city": "Buffalo",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -78.875874,
+        42.8892794
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/9817704919",
+      "url": "https://www.openstreetmap.org/node/9817704919",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:25.631Z"
+    }
+  },
+  {
+    "_id": "osm:node:9836290232",
+    "name": "Aloft Hotel",
+    "city": "Buffalo",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -78.8738708,
+        42.8930632
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/9836290232",
+      "url": "https://www.openstreetmap.org/node/9836290232",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:25.631Z"
+    }
+  },
+  {
+    "_id": "osm:node:9840409728",
+    "name": "The Westin",
+    "city": "Buffalo",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -78.8770114,
+        42.8912023
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/9840409728",
+      "url": "https://www.openstreetmap.org/node/9840409728",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:25.631Z"
+    }
+  },
+  {
+    "_id": "osm:node:11200923980",
+    "name": "Courtyard by Marriott Buffalo Downtown/Canalside",
+    "city": "Buffalo",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "125 Main Street 14203",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -78.876388,
+        42.8779377
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/11200923980",
+      "url": "https://www.openstreetmap.org/node/11200923980",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:25.632Z"
+    }
+  },
+  {
+    "_id": "osm:way:31248148",
+    "name": "Hampton Inn & Suites",
+    "city": "Buffalo",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "220 Delaware Avenue 14202",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -78.8774584,
+        42.890625
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/31248148",
+      "url": "https://www.openstreetmap.org/way/31248148",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:25.632Z"
+    }
+  },
+  {
+    "_id": "osm:way:49426330",
+    "name": "Buffalo Grand Hotel & Event Center",
+    "city": "Buffalo",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "120 Church Street 14202",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -78.8812196,
+        42.8830277
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/49426330",
+      "url": "https://www.openstreetmap.org/way/49426330",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:25.632Z"
+    }
+  },
+  {
+    "_id": "osm:way:274712151",
+    "name": "The Lofts on Pearl",
+    "city": "Buffalo",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "92 Pearl Street 14202",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -78.8773037,
+        42.8815057
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/274712151",
+      "url": "https://www.openstreetmap.org/way/274712151",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:25.632Z"
+    }
+  },
+  {
+    "_id": "osm:way:446466014",
+    "name": "The Mansion on Delaware Avenue",
+    "city": "Buffalo",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "414 Delaware Avenue 14202",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -78.8756438,
+        42.8956827
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/446466014",
+      "url": "https://www.openstreetmap.org/way/446466014",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:25.632Z"
+    }
+  },
+  {
+    "_id": "osm:way:448018638",
+    "name": "Wyndham Garden Buffalo Downtown",
+    "city": "Buffalo",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "125 High Street 14203",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -78.864594,
+        42.9000123
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/448018638",
+      "url": "https://www.openstreetmap.org/way/448018638",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:25.632Z"
+    }
+  },
+  {
+    "_id": "osm:way:626433721",
+    "name": "Buffalo Marriott at LECOM Harborcenter",
+    "city": "Buffalo",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "95 Main Street 14203",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -78.8768571,
+        42.8768416
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/626433721",
+      "url": "https://www.openstreetmap.org/way/626433721",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:25.632Z"
+    }
+  },
+  {
+    "_id": "osm:way:1069428316",
+    "name": "Hotel at the Lafayette, Trademark Collection by Wyndham",
+    "city": "Buffalo",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "391 Washington Street 14203",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -78.8729273,
+        42.8849036
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/1069428316",
+      "url": "https://www.openstreetmap.org/way/1069428316",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:25.632Z"
+    }
+  },
+  {
+    "_id": "osm:way:1069646975",
+    "name": "Embassy Suites",
+    "city": "Buffalo",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "200 Delaware Avenue 14202",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -78.8778905,
+        42.8896474
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/1069646975",
+      "url": "https://www.openstreetmap.org/way/1069646975",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:25.632Z"
+    }
+  },
+  {
+    "_id": "osm:way:1072444422",
+    "name": "Holiday Inn Express & Suites",
+    "city": "Buffalo",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "601 Main Street 14203",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -78.8723763,
+        42.8902917
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/1072444422",
+      "url": "https://www.openstreetmap.org/way/1072444422",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:25.632Z"
+    }
+  },
+  {
+    "_id": "osm:way:1073234309",
+    "name": "Lenox Hotel",
+    "city": "Buffalo",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -78.8744717,
+        42.9019693
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/1073234309",
+      "url": "https://www.openstreetmap.org/way/1073234309",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:25.632Z"
+    }
+  },
+  {
+    "_id": "osm:way:1073889482",
+    "name": "Residence Inn",
+    "city": "Buffalo",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "620 Delaware Avenue 14202",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -78.8739274,
+        42.9010507
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/1073889482",
+      "url": "https://www.openstreetmap.org/way/1073889482",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:25.632Z"
+    }
+  },
+  {
+    "_id": "osm:way:1224634776",
+    "name": "Best Western",
+    "city": "Buffalo",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "510 Delaware Avenue 14202",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -78.8749281,
+        42.8982758
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/1224634776",
+      "url": "https://www.openstreetmap.org/way/1224634776",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:25.632Z"
+    }
+  },
+  {
+    "_id": "osm:node:9909980595",
+    "name": "The Argus Hotel",
+    "city": "Albany",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.7737379,
+        42.6595957
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/9909980595",
+      "url": "https://www.openstreetmap.org/node/9909980595",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:31.787Z"
+    }
+  },
+  {
+    "_id": "osm:way:77030046",
+    "name": "Hilton Albany",
+    "city": "Albany",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "40 Lodge Street 12207",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.7531901,
+        42.6507194
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/77030046",
+      "url": "https://www.openstreetmap.org/way/77030046",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:31.790Z"
+    }
+  },
+  {
+    "_id": "osm:way:88967176",
+    "name": "Hampton Inn & Suites Albany - Downtown",
+    "city": "Albany",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "25 Chapel Street 12210",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.7516374,
+        42.6534706
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/88967176",
+      "url": "https://www.openstreetmap.org/way/88967176",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:31.790Z"
+    }
+  },
+  {
+    "_id": "osm:way:92108238",
+    "name": "TownePlace Suites Albany Downtown/Medical Center",
+    "city": "Albany",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "22 Holland Avenue 12209",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.7723919,
+        42.6462552
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/92108238",
+      "url": "https://www.openstreetmap.org/way/92108238",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:31.790Z"
+    }
+  },
+  {
+    "_id": "osm:way:93385869",
+    "name": "Renaissance Albany Hotel",
+    "city": "Albany",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "142 State Street 12207",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.7557034,
+        42.6506398
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/93385869",
+      "url": "https://www.openstreetmap.org/way/93385869",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:31.790Z"
+    }
+  },
+  {
+    "_id": "osm:way:93385872",
+    "name": "Fairfield Inn & Suites Albany Downtown",
+    "city": "Albany",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "74 State Street 12207",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.7525262,
+        42.649185
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/93385872",
+      "url": "https://www.openstreetmap.org/way/93385872",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:31.791Z"
+    }
+  },
+  {
+    "_id": "osm:way:1067651591",
+    "name": "Hyatt Place Albany/Downtown",
+    "city": "Albany",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "82 Montgomery Street 12207",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.7475708,
+        42.6546318
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "way/1067651591",
+      "url": "https://www.openstreetmap.org/way/1067651591",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:31.791Z"
+    }
+  },
+  {
+    "_id": "osm:relation:1321854",
+    "name": "Country Inn & Suites by Radisson",
+    "city": "Albany",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "300 Broadway 12207",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.7503309,
+        42.6455624
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "relation/1321854",
+      "url": "https://www.openstreetmap.org/relation/1321854",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-11T18:04:31.791Z"
+    }
+  }
+]

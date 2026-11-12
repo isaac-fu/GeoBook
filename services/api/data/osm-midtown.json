@@ -1,0 +1,1802 @@
+[
+  {
+    "_id": "osm:node:990032612",
+    "name": "Latham",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "4 East 28th Street",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9867075,
+        40.7443441
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/990032612",
+      "url": "https://www.openstreetmap.org/node/990032612",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.673Z"
+    }
+  },
+  {
+    "_id": "osm:node:1273406878",
+    "name": "Tempo",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "1568 Broadway 10036",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9844836,
+        40.7590118
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/1273406878",
+      "url": "https://www.openstreetmap.org/node/1273406878",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.677Z"
+    }
+  },
+  {
+    "_id": "osm:node:1297296350",
+    "name": "Clarion Hotel Park Avenue",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9832129,
+        40.7441337
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/1297296350",
+      "url": "https://www.openstreetmap.org/node/1297296350",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.677Z"
+    }
+  },
+  {
+    "_id": "osm:node:1427273334",
+    "name": "Fitzpatrick Grand Central Hotel",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "141 East 44th Street 10017",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9744845,
+        40.7526594
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/1427273334",
+      "url": "https://www.openstreetmap.org/node/1427273334",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.677Z"
+    }
+  },
+  {
+    "_id": "osm:node:1707825821",
+    "name": "TRYP by Wyndham New York City Times Square",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9945935,
+        40.7537504
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/1707825821",
+      "url": "https://www.openstreetmap.org/node/1707825821",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.677Z"
+    }
+  },
+  {
+    "_id": "osm:node:1821451551",
+    "name": "YOTEL",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "570 10th Avenue 10036",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.995439,
+        40.7590853
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/1821451551",
+      "url": "https://www.openstreetmap.org/node/1821451551",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.677Z"
+    }
+  },
+  {
+    "_id": "osm:node:2165157812",
+    "name": "W Hotels",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "541 Lexington Avenue 10022",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9725033,
+        40.7559859
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/2165157812",
+      "url": "https://www.openstreetmap.org/node/2165157812",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.677Z"
+    }
+  },
+  {
+    "_id": "osm:node:2307164617",
+    "name": "Senton Hotel",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "39 West 27th Street 10001",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9900206,
+        40.7451377
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/2307164617",
+      "url": "https://www.openstreetmap.org/node/2307164617",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.677Z"
+    }
+  },
+  {
+    "_id": "osm:node:2307164624",
+    "name": "Broadway Plaza Hotel",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "1155 Broadway 10001",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9891087,
+        40.744469
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/2307164624",
+      "url": "https://www.openstreetmap.org/node/2307164624",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.677Z"
+    }
+  },
+  {
+    "_id": "osm:node:2317577533",
+    "name": "Hotel Giraffe",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "365 Park Avenue South 10016",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.984716,
+        40.742143
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/2317577533",
+      "url": "https://www.openstreetmap.org/node/2317577533",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:2325990473",
+    "name": "Hotel Chelsea",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "222 West 23rd Street 10011",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9968175,
+        40.7443742
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/2325990473",
+      "url": "https://www.openstreetmap.org/node/2325990473",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:2377128188",
+    "name": "The GEM Hotel Chelsea",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "300 West 22nd Street 10011",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9993815,
+        40.7446533
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/2377128188",
+      "url": "https://www.openstreetmap.org/node/2377128188",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:2535060647",
+    "name": "Roger Smith Hotel",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9742339,
+        40.7549383
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/2535060647",
+      "url": "https://www.openstreetmap.org/node/2535060647",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:2639531871",
+    "name": "Renaissance New York Times Square Hotel",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "214 7th Avenue",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9845837,
+        40.7597371
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/2639531871",
+      "url": "https://www.openstreetmap.org/node/2639531871",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:2704104151",
+    "name": "Carlton Arms Hotel",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "160 East 25th Street 10010",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9826682,
+        40.7401959
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/2704104151",
+      "url": "https://www.openstreetmap.org/node/2704104151",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:2706918023",
+    "name": "Parksouth Hotel",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "124 East 28th Street 10016",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9830954,
+        40.7427837
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/2706918023",
+      "url": "https://www.openstreetmap.org/node/2706918023",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:2706939797",
+    "name": "The Fifth Avenue Hotel",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "1 West 28th Street 10001",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9877939,
+        40.7449926
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/2706939797",
+      "url": "https://www.openstreetmap.org/node/2706939797",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:2709335872",
+    "name": "Mondrian Park Avenue",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "444 Park Avenue South 10016",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9832361,
+        40.7447966
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/2709335872",
+      "url": "https://www.openstreetmap.org/node/2709335872",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:2709702498",
+    "name": "Refinery",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "63 West 38th Street 10018",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9853616,
+        40.7521714
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/2709702498",
+      "url": "https://www.openstreetmap.org/node/2709702498",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:2709702525",
+    "name": "Americana Inn",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "69 West 38th Street 10018",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9855082,
+        40.7522336
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/2709702525",
+      "url": "https://www.openstreetmap.org/node/2709702525",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:2711712840",
+    "name": "Westgate New York Grand Central Hotel",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "304 East 42nd Street 10017",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9718919,
+        40.7495001
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/2711712840",
+      "url": "https://www.openstreetmap.org/node/2711712840",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:2714855400",
+    "name": "70 Park Avenue Hotel",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "70 Park Avenue 10016",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9796281,
+        40.7498595
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/2714855400",
+      "url": "https://www.openstreetmap.org/node/2714855400",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:2777135780",
+    "name": "Best Western Convention Center",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "522 West 38th Street",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9982956,
+        40.7573258
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/2777135780",
+      "url": "https://www.openstreetmap.org/node/2777135780",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:2945458607",
+    "name": "Andaz",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "485 5th Avenue 10017",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9810928,
+        40.7528315
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/2945458607",
+      "url": "https://www.openstreetmap.org/node/2945458607",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:3008612563",
+    "name": "Hilton New York Fashion District",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "150 West 26th Street 10001",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9936036,
+        40.745587
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/3008612563",
+      "url": "https://www.openstreetmap.org/node/3008612563",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:3507260981",
+    "name": "The Paul",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9891468,
+        40.7460969
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/3507260981",
+      "url": "https://www.openstreetmap.org/node/3507260981",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:3576702127",
+    "name": "Hotel Boutique",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.97413,
+        40.7537603
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/3576702127",
+      "url": "https://www.openstreetmap.org/node/3576702127",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:3576702128",
+    "name": "Club Quarters Hotel",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "128 East 45th Street 10017",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9744245,
+        40.753146
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/3576702128",
+      "url": "https://www.openstreetmap.org/node/3576702128",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:3876344857",
+    "name": "The Townhouse Inn of Chelsea",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "131 West 23rd Street 10011",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.993848,
+        40.7435189
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/3876344857",
+      "url": "https://www.openstreetmap.org/node/3876344857",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:3953222220",
+    "name": "The Renwick Hotel",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "118 East 40th Street 10016",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9776212,
+        40.7501799
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/3953222220",
+      "url": "https://www.openstreetmap.org/node/3953222220",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:3966939350",
+    "name": "Hotel Seville NoMad",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "22 East 29th Street 10016",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9855974,
+        40.744645
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/3966939350",
+      "url": "https://www.openstreetmap.org/node/3966939350",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:4061847835",
+    "name": "Wyndham Garden Manhattan Chelsea West",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "37 West 24th Street 10010",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9908672,
+        40.7432132
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/4061847835",
+      "url": "https://www.openstreetmap.org/node/4061847835",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:4243439484",
+    "name": "Sanctuary Hotel",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "132 West 47th Street 10036",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9832127,
+        40.7584738
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/4243439484",
+      "url": "https://www.openstreetmap.org/node/4243439484",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:4252963690",
+    "name": "Royalton Park Avenue",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "420 Park Avenue South 10016",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9838903,
+        40.7438908
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/4252963690",
+      "url": "https://www.openstreetmap.org/node/4252963690",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:4402339491",
+    "name": "Chelsea Savoy Hotel",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "204 West 23rd Street",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9960078,
+        40.7440882
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/4402339491",
+      "url": "https://www.openstreetmap.org/node/4402339491",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:5122652629",
+    "name": "New York EDITION",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9873848,
+        40.7412798
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/5122652629",
+      "url": "https://www.openstreetmap.org/node/5122652629",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:5124295521",
+    "name": "U Hotel Fifth Avenue",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "373 5th Avenue",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9838247,
+        40.7491347
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/5124295521",
+      "url": "https://www.openstreetmap.org/node/5124295521",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:5228777783",
+    "name": "Residence Inn Manhattan/Times Square",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "1033 Avenue of the Americas 10018",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9858447,
+        40.7528306
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/5228777783",
+      "url": "https://www.openstreetmap.org/node/5228777783",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:5265708147",
+    "name": "Colonial House",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "318 West 22nd Street",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9999695,
+        40.7448844
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/5265708147",
+      "url": "https://www.openstreetmap.org/node/5265708147",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:5281963249",
+    "name": "Heritage Hotel",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "18 West 25th Street",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9900361,
+        40.7432835
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/5281963249",
+      "url": "https://www.openstreetmap.org/node/5281963249",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:5758246021",
+    "name": "Hotel Hayden",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9921509,
+        40.7468751
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/5758246021",
+      "url": "https://www.openstreetmap.org/node/5758246021",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:6013503382",
+    "name": "Avalon Hotel",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.984595,
+        40.7466304
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/6013503382",
+      "url": "https://www.openstreetmap.org/node/6013503382",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:6150564513",
+    "name": "The Fifty Sonesta Select",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "155 East 50th Street 10022",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9708905,
+        40.7561485
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/6150564513",
+      "url": "https://www.openstreetmap.org/node/6150564513",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:6150575536",
+    "name": "The Shelburne Sonesta",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "303 Lexington Avenue 10016",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9780562,
+        40.7484427
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/6150575536",
+      "url": "https://www.openstreetmap.org/node/6150575536",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:6262714386",
+    "name": "hotel mela",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.984341,
+        40.7565163
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/6262714386",
+      "url": "https://www.openstreetmap.org/node/6262714386",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:6564006743",
+    "name": "The Pod Times Square",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "400 West 42nd Street 10036",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9932281,
+        40.7584977
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/6564006743",
+      "url": "https://www.openstreetmap.org/node/6564006743",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:6611254406",
+    "name": "Club Quarter Hôtel",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9812639,
+        40.7559916
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/6611254406",
+      "url": "https://www.openstreetmap.org/node/6611254406",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:6615272826",
+    "name": "The Hotel @ Times Square",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "59 West 46th Street 10036",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9812965,
+        40.7571139
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/6615272826",
+      "url": "https://www.openstreetmap.org/node/6615272826",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:6702620776",
+    "name": "Park Terrace Hotel",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9829743,
+        40.7524506
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/6702620776",
+      "url": "https://www.openstreetmap.org/node/6702620776",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:7415479526",
+    "name": "Hilton Garden Inn Midtown Park Avenue",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "45 East 33rd Street 10016",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.982336,
+        40.7468137
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/7415479526",
+      "url": "https://www.openstreetmap.org/node/7415479526",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:7747395789",
+    "name": "Paramount Hotel",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9869234,
+        40.7592445
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/7747395789",
+      "url": "https://www.openstreetmap.org/node/7747395789",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:9325661454",
+    "name": "tba",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "340 West 40th Street",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9932298,
+        40.756878
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/9325661454",
+      "url": "https://www.openstreetmap.org/node/9325661454",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:9923066116",
+    "name": "Truss Hotel Times Square",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "515 9th Avenue 10018",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9944985,
+        40.7565827
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/9923066116",
+      "url": "https://www.openstreetmap.org/node/9923066116",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:10916743205",
+    "name": "AC Hotel",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "260 West 40th Street 10018",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9903003,
+        40.7556434
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/10916743205",
+      "url": "https://www.openstreetmap.org/node/10916743205",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:11226171700",
+    "name": "Arlo",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "351 West 38th Street 10018",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9936089,
+        40.755668
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/11226171700",
+      "url": "https://www.openstreetmap.org/node/11226171700",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:11748989360",
+    "name": "Moxy NYC Times Square",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "487 7th Avenue 10018",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9892637,
+        40.7522281
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/11748989360",
+      "url": "https://www.openstreetmap.org/node/11748989360",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:11850467068",
+    "name": "Courtyard New York Manhattan/Times Square",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "114 West 40th Street",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9861665,
+        40.7536218
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/11850467068",
+      "url": "https://www.openstreetmap.org/node/11850467068",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:12273325701",
+    "name": "Elysée New York",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "60 East 54th Street 10022",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.973171,
+        40.7599083
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/12273325701",
+      "url": "https://www.openstreetmap.org/node/12273325701",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:12495990801",
+    "name": "Motto by Hilton Times Square",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9833914,
+        40.75891
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/12495990801",
+      "url": "https://www.openstreetmap.org/node/12495990801",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  },
+  {
+    "_id": "osm:node:12715466601",
+    "name": "Motto by Hilton Times Square",
+    "city": "New York",
+    "province": "New York",
+    "country": "United States",
+    "countryCode": "US",
+    "address": "145 West 47th Street",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.9833905,
+        40.7589115
+      ]
+    },
+    "priceFrom": null,
+    "currency": null,
+    "amenities": [],
+    "images": [],
+    "roomReferences": [],
+    "synthetic": false,
+    "source": {
+      "provider": "OpenStreetMap",
+      "id": "node/12715466601",
+      "url": "https://www.openstreetmap.org/node/12715466601",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "fetchedAt": "2026-11-10T23:18:04.678Z"
+    }
+  }
+]

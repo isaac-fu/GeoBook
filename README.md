@@ -1,6 +1,88 @@
 # GeoBook
 
-GeoBook focuses on finding hotels by travel time and route distance to the places guests care about. Walking, cycling, and driving are evaluated separately; hotels are ranked using Mapbox matrix estimates.
+Hotel discovery and demo reservations with separate guest, hotel-operator, and admin frontends. Ordinary destination search and booking work without Mapbox; travel-time search uses isochrone polygons and route matrices.
+
+## Docker setup
+
+Copy `.env.example` to the root `.env` if you do not already have one; preserve existing configuration. From `infra`:
+
+```powershell
+docker compose --env-file ../.env up --build -d
+```
+
+| App | URL |
+| --- | --- |
+| Guest | http://localhost:8080 |
+| Hotel operator | http://localhost:8081 |
+| Admin | http://localhost:8082 |
+| API readiness | http://localhost:4000/api/health/ready |
+
+Docker installs and builds all frontend, API, and worker dependencies. Nginx provides same-origin API proxying. MongoDB, PostgreSQL/PostGIS, and Kafka use health checks. Kafka uses KRaft, without ZooKeeper. API startup automatically applies additive SQL migrations to existing databases. Keep existing volumes; do not remove them to update the schema.
+
+GeoBook defaults to host port 5433 to coexist with another PostgreSQL installation on 5432. `POSTGRES_PORT` controls this mapping. Containers still connect to `postgres:5432`; host-run Node processes use port 5433 in `DATABASE_URL`. Password-authentication errors mean the configured credentials do not match the instance being reached. Changing Compose's initial password does not reset an existing database volume's password.
+
+Set `MAPBOX_TOKEN` in the root `.env` and recreate the API for live travel estimates. The token stays on the server.
+
+## Try the complete demo
+
+1. Register a guest account, open a featured demo property, and select future dates and guests.
+2. Check availability, select a room, and review the server-calculated total.
+3. Confirm the explicitly labeled demo reservation. No payment or actual accommodation is involved.
+4. Open **My bookings** to view or cancel it before check-in. **Updates** shows Kafka-delivered booking/cancellation notifications.
+5. Save favorite hotels and manage your name/password under your account.
+
+Startup seeds **Demo Harbor House** (San Francisco) and **Demo Park House** (New York), each with three physical rooms. Reseeding is idempotent. Imported real OSM hotels remain discovery-only without connected supplier inventory.
+
+On port 8081, register an operator account, create a property, and add rooms with capacity and rates. Edit descriptions, amenities, attributed/licensed photo URLs, publication status, room availability blocks, and rates; view your reservations. Each inventory row represents one physical room, not a room-type allocation. Operator-created inventory is also demo inventory.
+
+To manage the built-in properties, optionally set `DEMO_PASSWORD` (at least 12 characters) **before their first seed**, then sign in as `demo.owner@geobook.test`. Reseeding never resets an existing account's password. Otherwise, register your own operator account and create your own property.
+
+Admin registration is not public. After API startup, from `infra` in PowerShell:
+
+```powershell
+$env:ADMIN_EMAIL = Read-Host 'Administrator email'
+$adminSecret = Read-Host 'Administrator password (at least 12 characters)' -AsSecureString
+$env:ADMIN_PASSWORD = [System.Net.NetworkCredential]::new('', $adminSecret).Password
+docker compose exec -e ADMIN_EMAIL -e ADMIN_PASSWORD api npx tsx scripts/bootstrap-admin.ts
+Remove-Item Env:ADMIN_PASSWORD
+Remove-Item Env:ADMIN_EMAIL
+```
+
+An existing account must supply its matching password before promotion. The admin portal shows users, booking totals, pending events, and property moderation. Operators cannot override admin suspensions.
+
+## Implemented core
+
+- Destination search across name, city, province/state, and country; pagination, price sorting/filtering, and date/guest availability filtering.
+- Hotel profiles, descriptions, amenities, licensed photo attribution, verified-stay reviews, favorites, and checkout.
+- Registration/login/logout, salted scrypt password hashes, hashed server-side sessions, HttpOnly cookies, request-origin checks, password rotation, and role/ownership checks.
+- Transactional bookings with server-calculated prices, room locking, a PostgreSQL overlap exclusion constraint, idempotency keys, and cancellation.
+- One review per completed confirmed stay.
+- Transactional outbox → Kafka → persistent in-app notifications with duplicate-event protection.
+- Separate guest, operator, and admin applications.
+
+MongoDB stores hotel content and geography. PostgreSQL stores accounts, sessions, rooms, blocks, bookings, favorites, reviews, notifications, and outbox events.
+
+This is a local development MVP. Bookings and prices are demo data; payment processing, taxes, supplier settlement, email verification/recovery, and outbound email/SMS are not implemented. Production needs managed secrets, HTTPS/secure cookies, restricted database access, and durable operations. Compose uses local HTTP and development credentials.
+
+## Hotel catalog
+
+Bundled OSM location files contain 146 records: Midtown Manhattan (60), San Francisco (20), Los Angeles (20), San Diego (20), Buffalo (18), and Albany (8). These are central-city samples, not statewide coverage. From `infra`:
+
+```powershell
+docker compose exec api node --experimental-strip-types scripts/import-hotels.ts data/osm-midtown.json --apply
+docker compose exec api node --experimental-strip-types scripts/import-hotels.ts data/osm-california-new-york.json --apply
+docker compose exec api node --experimental-strip-types scripts/verify-catalog.ts
+```
+
+Existing IDs are skipped to preserve edits. Omit `--apply` for validation only. Imports are explicit maintenance tasks, never startup or guest-search side effects. Search city names, “California”, or “New York” after import.
+
+Fresh region samples support `--osm-region=san-francisco`, `los-angeles`, `san-diego`, `buffalo`, `albany`, and `midtown`. `OVERPASS_URL` selects an optional public query server; servers can be temporarily unavailable. For host-run commands, prefix script/data paths with `services/api/`.
+
+Schemas validate geography, coordinates, nullable rates, descriptions, ratings with provider attribution, amenities, licensed images, and provenance. MongoDB has a 2dsphere index. OSM supplies locations, not live rates, inventory, photographs, or reviews; missing content is labeled. Preserve catalog NOTICE files and attribution to © OpenStreetMap contributors under [ODbL](https://www.openstreetmap.org/copyright). Separate OSM elements may describe the same physical property and require reconciliation.
+
+## Travel UI
+
+Open **Explore travel times** on a hotel profile. The map supports anchor selection, coordinates, budgets, walking/cycling/driving modes, any/all matching, distance/time ranking, and nested shaded isochrone polygons with minute labels. Layer toggles do not request new routes. Changing criteria clears stale results. Enable unpriced hotels to include OSM listings. Live estimates require Mapbox and are never fabricated.
 
 ## Travel search (implemented API slice)
 
@@ -28,31 +110,37 @@ The API returns GeoJSON contours per mode, each hotel's duration in seconds and 
 
 Outbound searches prefilter MongoDB hotel GeoJSON points with the outer contour using a 2dsphere index, then calculate matrix estimates in batches of 24 hotels plus the anchor. Contours are approximate: this mode ranks the candidates admitted by those polygons. Inbound searches do not use outbound contours to exclude hotels, because route direction matters; returned contours are explicitly labeled outbound context. Matrix results enforce the final budgets.
 
-This first slice limits searches to 120 candidates and two concurrent requests per API process. Larger searches return 422 rather than silently ranking an arbitrary subset. Production work includes shared rate limits, a provider-policy-compliant cache, stronger candidate discovery for inbound searches, availability filters, and the map UI. Public transit, combined transport legs, departure-time traffic, and multiple destinations are future provider/UI work. No live routing data is mocked as real estimates.
+This first slice limits searches to 120 candidates and two concurrent requests per API process. Larger searches return 422 rather than silently ranking an arbitrary subset. Production work includes shared rate limits, a provider-policy-compliant cache, stronger candidate discovery for inbound searches, availability filters, and availability integration. Public transit, combined transport legs, departure-time traffic, and multiple destinations are future provider/UI work. No live routing data is mocked as real estimates.
 
 Hotel documents require `priceFrom` and `location: { type: "Point", coordinates: [longitude, latitude] }`. Set MAPBOX_TOKEN in the environment (Compose passes it through); credentials stay on the server. Run `npm install`, `npm --workspace services/api run build`, and `npm --workspace services/api test`.
 
-## Planned product architecture
+## Development and checks
 
-- `apps/guest-web` — guest search, map results, hotel details, and booking flow.
-- `apps/hotel-web` — inventory, availability, and reservation management for properties.
-- `apps/admin-web` — operational metrics, event health, and platform administration.
-- `services/api` — Node/Express API. MongoDB stores hotel/property documents; PostgreSQL stores users, rooms, and bookings.
-- `services/worker` — Kafka consumer for notifications, search-index refreshes, and analytics events.
-- `infra/docker-compose.yml` — MongoDB, PostgreSQL/PostGIS, Kafka, Zookeeper, and the API worker stack.
+Use Node 22+ and the root workspace lockfile:
 
-## Local development
-
-```bash
-docker compose -f infra/docker-compose.yml up --build
+```powershell
+npm ci
+npm run build
+npm --workspace services/api test
+node --env-file=.env --import tsx services/api/src/server.ts
 ```
 
-The API is available at `http://localhost:4000/health`. The three frontend applications are planned and have not been scaffolded yet. Authentication and notification delivery also remain unfinished.
+Run `npm run dev:guest`, `npm run dev:hotel`, and `npm run dev:admin` in separate terminals (ports 5173–5175). Vite proxies to port 4000; `API_PROXY_TARGET` overrides this. Run the built worker with `node --env-file=.env services/worker/dist/worker.js`.
 
-```bash
-npm install
-npm run dev:api
+After building, integration checks create random PostgreSQL schemas and MongoDB databases and clean up their own data:
+
+```powershell
+node --env-file=.env services/api/test/integration.cjs
+node --env-file=.env services/api/test/notifications.cjs
 ```
 
-Copy `.env.example` to `.env` for local configuration. The API intentionally keeps hotel documents in MongoDB while booking state lives in PostgreSQL so reservation conflicts can be protected with a database transaction and an exclusion constraint.
+The first requires PostgreSQL and MongoDB and tests migration reruns, authentication, ownership, an eight-request booking race, idempotency, cancellation, availability blocks, reviews, moderation, and password rotation. The second also requires Kafka and a built worker; it verifies outbox delivery and duplicate handling with an isolated topic/group. Use a local development database account with schema creation permission, never production.
+
+## Next milestones
+
+1. Payment-provider sandbox checkout, verification/recovery email, and richer room types/rate plans.
+2. Elasticsearch autocomplete, typo tolerance, facets, and natural-language intent parsing.
+3. Availability-aware travel search, larger candidate discovery, caching, and supported transit/combined-mode routing.
+
+Current travel modes are evaluated separately; they are not combined walking-plus-transit journeys.
 
