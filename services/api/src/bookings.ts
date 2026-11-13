@@ -1,3 +1,4 @@
+import type { Payments } from './payments.js';
 import type { Express } from 'express';
 import type { Pool, PoolClient } from 'pg';
 import type { MongoClient } from 'mongodb';
@@ -17,6 +18,7 @@ export function validStay(stay: z.infer<typeof staySchema>) {
   if (nights(stay) > 90) throw new HttpError(400, 'A stay cannot exceed 90 nights.');
 }
 export const bookingSelect = `SELECT b.*,lower(b.stay)::text AS check_in,upper(b.stay)::text AS check_out,
+  (SELECT status FROM sandbox_payments p WHERE p.booking_id=b.id) AS payment_status,
   EXISTS(SELECT 1 FROM reviews v WHERE v.booking_id=b.id) AS reviewed FROM bookings b`;
 export async function emit(client: PoolClient, type: string, booking: any) {
   const message = `${type === 'booking.created' ? 'Reservation confirmed' : 'Reservation cancelled'}: ${booking.hotel_name}.`;
@@ -42,7 +44,7 @@ function replayMatches(booking: any, data: z.infer<typeof reserveSchema>) {
     throw new HttpError(409, 'This request key was already used for a different reservation.');
   }
 }
-export function registerBookings(app: Express, pool: Pool, mongo: MongoClient) {
+export function registerBookings(app: Express, pool: Pool, mongo: MongoClient, payment: Payments) {
   app.post('/api/bookings', route(async (req, res) => {
     const current = user(res); const data = reserveSchema.parse(req.body); validStay(data);
     const previous = await pool.query(`${bookingSelect} WHERE b.user_id=$1 AND b.request_key=$2`, [current.id, data.requestKey]);
@@ -93,6 +95,7 @@ export function registerBookings(app: Express, pool: Pool, mongo: MongoClient) {
       const booking = result.rows[0]; if (!booking) throw new HttpError(404, 'Reservation not found.');
       if (booking.status === 'cancelled') { await client.query('COMMIT'); res.json({ data: booking }); return; }
       if (booking.check_in <= new Date().toISOString().slice(0, 10)) throw new HttpError(409, 'Online cancellation is available only before check-in.');
+      await payment.cancel(client, booking);
       await client.query("UPDATE bookings SET status='cancelled',cancelled_at=now() WHERE id=$1", [id]);
       await emit(client, 'booking.cancelled', booking); await client.query('COMMIT');
       res.json({ data: { ...booking, status: 'cancelled' } });

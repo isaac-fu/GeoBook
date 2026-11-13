@@ -5,6 +5,7 @@ const { Pool } = require('pg');
 const { MongoClient } = require('mongodb');
 const { migrate } = require('../dist/migrate.js');
 const { seedDemo } = require('../dist/demo.js');
+const Stripe = require('stripe');
 const { createApp } = require('../dist/app.js');
 
 async function main() {
@@ -24,8 +25,23 @@ async function main() {
     await migrate(pg); await migrate(pg); // migration reruns must be safe
     await db.collection('hotels').createIndex({ location: '2dsphere' });
     await seedDemo(pg, mappedMongo);
+    const stripeSdk = new Stripe('sk_test_local_only');
+    process.env.STRIPE_WEBHOOK_SECRET = 'whsec_integration_only';
+    const sessions = new Map(), refunds = []; let failRefund = false, loseCheckoutResponse = true;
+    const fakeStripe = { webhooks: stripeSdk.webhooks, checkout: { sessions: {
+      create: async (data, options) => {
+        if (sessions.has(options.idempotencyKey)) return sessions.get(options.idempotencyKey);
+        const session = { id: 'cs_test_' + randomUUID(), mode: data.mode, livemode: false, client_reference_id: data.client_reference_id, amount_total: data.line_items[0].price_data.unit_amount, currency: data.line_items[0].price_data.currency, status: 'open', payment_status: 'unpaid', url: 'https://checkout.stripe.com/test', payment_intent: 'pi_' + randomUUID() };
+        sessions.set(options.idempotencyKey, session); if (loseCheckoutResponse) { loseCheckoutResponse = false; throw Error('Simulated lost provider response'); } return session;
+      },
+      retrieve: async id => [...sessions.values()].find(s => s.id === id),
+      expire: async id => { const s = [...sessions.values()].find(s => s.id === id); if(s.status !== 'open') throw Error('Already completed'); s.status = 'expired'; return s; },
+    } }, refunds: {
+      list: async ({payment_intent}) => ({ data: refunds.filter(r => r.payment_intent === payment_intent) }),
+      create: async data => { if (failRefund) throw Error('Simulated refund failure'); const refund = { ...data, id: 're_' + randomUUID(), status: 'succeeded' }; refunds.push(refund); return refund; },
+    } };
     const emails = []; let failMail = false;
-    server = createApp(mappedMongo, pg, async message => { if (failMail) throw new Error('Simulated delivery failure'); emails.push(message); }).listen(0, '127.0.0.1');
+    server = createApp(mappedMongo, pg, async message => { if (failMail) throw new Error('Simulated delivery failure'); emails.push(message); }, fakeStripe).listen(0, '127.0.0.1');
     await new Promise(resolve => server.once('listening', resolve));
     const base = 'http://127.0.0.1:' + server.address().port;
     async function call(path, method = 'GET', body, cookie, headers = {}) {
@@ -61,11 +77,44 @@ async function main() {
     const ownerCookie = winner.user_id === registered.body.user.id ? guest : other.cookie;
     const strangerCookie = ownerCookie === guest ? other.cookie : guest;
     assert.equal((await call('/bookings/' + winner.id + '/cancel','POST',{},strangerCookie)).status, 404);
+    const checkoutPath = '/bookings/' + winner.id + '/checkout';
+    assert.equal((await call(checkoutPath, 'POST', {}, strangerCookie)).status, 404);
+    assert.equal((await call(checkoutPath, 'POST', {}, ownerCookie)).status, 500);
+    const checkouts = await Promise.all([call(checkoutPath, 'POST', {}, ownerCookie), call(checkoutPath, 'POST', {}, ownerCookie)]);
+    assert.ok(checkouts.every(r => r.status === 200), JSON.stringify(checkouts));
+    assert.equal(sessions.size, 1);
+    const paymentSession = [...sessions.values()][0];
+    assert.equal(paymentSession.amount_total, winner.total_cents);
+    async function webhook(session, type = 'checkout.session.completed', valid = true) {
+      const payload = JSON.stringify({ id: 'evt_' + randomUUID(), type, livemode: false, data: { object: session } });
+      const signature = stripeSdk.webhooks.generateTestHeaderString({ payload, secret: valid ? process.env.STRIPE_WEBHOOK_SECRET : 'wrong' });
+      const response = await fetch(base + '/api/payments/webhook', { method: 'POST', headers: { 'Content-Type': 'application/json', 'stripe-signature': signature }, body: payload });
+      return response.status;
+    }
+    assert.equal(await webhook(paymentSession, undefined, false), 400);
+    paymentSession.payment_status = 'paid'; paymentSession.status = 'complete';
+    paymentSession.amount_total++;
+    assert.equal(await webhook(paymentSession), 409);
+    paymentSession.amount_total--;
+    assert.equal(await webhook(paymentSession), 200);
+    assert.equal(await webhook(paymentSession, 'checkout.session.expired'), 200, 'old events use current provider state');
+    assert.equal((await pg.query('SELECT status FROM sandbox_payments WHERE booking_id=$1', [winner.id])).rows[0].status, 'paid');
+    failRefund = true;
+    assert.equal((await call('/bookings/' + winner.id + '/cancel', 'POST', {}, ownerCookie)).status, 500);
+    assert.equal((await pg.query('SELECT status FROM bookings WHERE id=$1', [winner.id])).rows[0].status, 'confirmed');
+    failRefund = false;
+
     const replay = await call('/bookings','POST',{ ...input, requestKey: winner.request_key },ownerCookie);
     assert.equal(replay.status, 200); assert.equal(replay.body.data.id, winner.id);
     assert.equal((await call('/bookings','POST',{ ...input, requestKey: winner.request_key, guests: 1 },ownerCookie)).status,409);
     assert.equal((await call('/bookings/' + winner.id + '/review','POST',{ score: 9, body: 'A wonderful stay for testing.' },ownerCookie)).status,403);
     assert.equal((await call('/bookings/' + winner.id + '/cancel','POST',{},ownerCookie)).status,200);
+    assert.equal(refunds.length, 1);
+    assert.equal(await webhook(paymentSession), 200);
+    assert.equal(refunds.length, 1);
+    assert.equal((await pg.query('SELECT status FROM sandbox_payments WHERE booking_id=$1', [winner.id])).rows[0].status, 'refunded');
+    assert.equal((await call(checkoutPath, 'POST', {}, ownerCookie)).status, 404);
+
     assert.equal((await call(hotelPath + '/availability?' + new URLSearchParams(stay))).body.rooms.length,3);
     assert.equal((await pg.query('SELECT count(*)::int AS n FROM outbox')).rows[0].n,2);
     await call('/favorites/' + encodeURIComponent(id),'POST',{},guest);
@@ -110,7 +159,10 @@ async function main() {
     const rateReplay = await call('/bookings', 'POST', rateInput, guest);
     assert.equal(rateReplay.status, 200); assert.equal(rateReplay.body.data.rate_plan_name, 'Breakfast stay');
     assert.equal(rateReplay.body.data.room_type, 'King suite');
+    assert.equal((await call('/bookings/' + rateBooking.body.data.id + '/checkout', 'POST', {}, guest)).status, 200);
     assert.equal((await call('/bookings/' + rateBooking.body.data.id + '/cancel', 'POST', {}, guest)).status, 200);
+    assert.equal((await pg.query('SELECT status FROM sandbox_payments WHERE booking_id=$1', [rateBooking.body.data.id])).rows[0].status, 'expired');
+
     assert.equal((await call('/bookings', 'POST', { ...rateInput, requestKey: randomUUID() }, guest)).status, 409);
     const pastBooking = await pg.query("INSERT INTO bookings(user_id,hotel_id,room_id,stay,total_cents,hotel_name,room_name,demo) VALUES($1,$2,$3,daterange(CURRENT_DATE-5,CURRENT_DATE-3,'[)'),10000,'Demo','Test room',true) RETURNING id", [registered.body.user.id,id,room.id]);
     assert.equal((await call('/bookings/' + pastBooking.rows[0].id + '/review','POST',{ score: 9, body: 'Completed stay review used for testing.' },guest)).status,201);
@@ -171,7 +223,7 @@ async function main() {
     await call('/account/password','POST',{ currentPassword:credentials.password,newPassword:'ReplacementPassword2027!' },guest);
     assert.equal((await call('/auth/me','GET',null,guest)).body.user,null);
     assert.equal((await call('/auth/login','POST',credentials)).status,401);
-    console.log('PASS: registration, sessions, CSRF, server prices, 8-way booking race, idempotency, cancellation, ownership, blocks, favorites, verified reviews, moderation, room rate plans, verification/recovery, expiry/replay, concurrent resets, delivery failure, password rotation, transactional outbox.');
+    console.log('PASS: registration, sessions, CSRF, server prices, 8-way booking race, idempotency, cancellation, ownership, blocks, favorites, verified reviews, moderation, sandbox checkout/webhooks/refunds, room rate plans, verification/recovery, expiry/replay, concurrent resets, delivery failure, password rotation, transactional outbox.');
   } finally {
     if (server) await new Promise(resolve => server.close(resolve));
     await pg.end();

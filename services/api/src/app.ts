@@ -1,3 +1,5 @@
+import Stripe from 'stripe';
+import { payments } from './payments.js';
 import express from 'express';
 import type { MongoClient } from 'mongodb';
 import type { Pool } from 'pg';
@@ -11,12 +13,13 @@ import { registerTravelSearch } from './travel-search.js';
 import { hotelSearchFilter } from './hotel-search.js';
 import { errors, route } from './http.js';
 
-export function createApp(mongo: MongoClient, pool: Pool, mailer?: AccountMailer) {
-  const app = express(); app.disable('x-powered-by'); app.use(express.json({ limit: '64kb' }));
+export function createApp(mongo: MongoClient, pool: Pool, mailer?: AccountMailer, stripe?: Stripe) {
+  const app = express(); const payment = payments(pool, stripe); payment.webhook(app); app.disable('x-powered-by'); app.use(express.json({ limit: '64kb' }));
   app.get('/health', (_req, res) => { res.json({ ok: true, service: 'geobook-api' }); });
   registerAuth(app, pool);
   registerAccountEmail(app, pool, mailer);
-  registerBookings(app, pool, mongo);
+  registerBookings(app, pool, mongo, payment);
+  payment.routes(app);
   registerManagement(app, pool, mongo);
   registerHotelProfiles(app, mongo, pool);
   registerTravelSearch(app, mongo);

@@ -65,7 +65,7 @@ An existing account must supply its matching password before promotion. The admi
 
 MongoDB stores hotel content and geography. PostgreSQL stores accounts, sessions, rooms, blocks, bookings, favorites, reviews, notifications, and outbox events.
 
-This is a local development MVP. Bookings and prices are demo data; payment processing, taxes, supplier settlement, outbound booking email/SMS are not implemented. Account verification and password recovery use SMTP with a local Mailpit inbox in Compose. Production needs managed secrets, HTTPS/secure cookies, restricted database access, and durable operations. Compose uses local HTTP and development credentials.
+This is a local development MVP. Bookings and prices are demo data; live payment processing, taxes, supplier settlement, and outbound booking email/SMS are not implemented. Optional Stripe sandbox checkout is available for testing. Account verification and password recovery use SMTP with a local Mailpit inbox in Compose. Production needs managed secrets, HTTPS/secure cookies, restricted database access, and durable operations. Compose uses local HTTP and development credentials.
 
 ## Hotel catalog
 
@@ -137,7 +137,28 @@ node --env-file=.env services/api/test/integration.cjs
 node --env-file=.env services/api/test/notifications.cjs
 ```
 
-The first requires PostgreSQL and MongoDB and tests migration reruns, authentication, ownership, an eight-request booking race, idempotency, cancellation, availability blocks, rate-plan pricing/minimum stays/shared inventory, booked-term snapshots, reviews, moderation, password rotation, verification links, recovery expiry/replay, and concurrent password resets. The second also requires Kafka and a built worker; it verifies outbox delivery and duplicate handling with an isolated topic/group. Use a local development database account with schema creation permission, never production.
+The first requires PostgreSQL and MongoDB and tests migration reruns, authentication, ownership, an eight-request booking race, idempotency, cancellation, availability blocks, rate-plan pricing/minimum stays/shared inventory, booked-term snapshots, reviews, moderation, password rotation, verification links, recovery expiry/replay, concurrent password resets, and sandbox payment creation/webhooks/refunds. The second also requires Kafka and a built worker; it verifies outbox delivery and duplicate handling with an isolated topic/group. Use a local development database account with schema creation permission, never production.
+
+## Optional Stripe sandbox checkout
+
+After confirming a demo reservation, open **My bookings → Open Stripe test checkout**. Payment is an optional test on an already-confirmed reservation; it does not reserve real accommodation or gate demo inventory. Only test-mode card payments are supported. Payment status is separate from reservation status, and returning from Stripe does not itself mark a payment successful.
+
+1. Set `STRIPE_SECRET_KEY` to a Stripe sandbox `sk_test_...` key. Live keys are rejected at startup.
+2. Forward sandbox events with the Stripe CLI:
+
+   ```powershell
+   stripe listen --events checkout.session.completed,checkout.session.expired,checkout.session.async_payment_succeeded --forward-to localhost:4000/api/payments/webhook
+   ```
+
+3. Set `STRIPE_WEBHOOK_SECRET` to the listener's signing secret and restart/recreate the API. Keep both credentials server-side. `PUBLIC_APP_URL` controls the return destination (port 8080 for Docker, 5173 for Vite).
+4. Create a future demo reservation, open checkout, and use [Stripe's documented test payment details](https://docs.stripe.com/testing). Return to My bookings and refresh the payment status after webhook delivery.
+5. Cancel the reservation before check-in to close open checkout or refund the test payment. If Stripe is unavailable or the refund is pending/failed, cancellation leaves the reservation intact and can be retried.
+
+The API charges the saved server-calculated total, verifies raw-body webhook signatures, checks reservation/amount/currency/test mode, and retrieves current provider state to handle duplicate and reordered events. Checkout creation and refunds use stable idempotency keys. A persisted checkout intent recovers a lost creation response; if it remains unresolved for 23 hours, further attempts require operator reconciliation rather than risking a duplicate charge. One checkout is allowed per reservation. Expired checkout does not cancel the demo reservation; cancel and create another reservation to repeat the test. Totals above 99,999,999 cents are rejected.
+
+Sandbox checkout is disabled without credentials. Integration tests use an injected fake provider and signed test webhooks; they exercise lost responses, concurrent creation, mismatched amounts, invalid signatures, refunds, and cancellation failures without contacting Stripe. Hosted checkout still requires a manual sandbox run with your credentials. Durable reconciliation jobs, dashboard-initiated refund synchronization, payment-required inventory holds, taxes, and production payments remain future work.
+
+Provider references: [Checkout fulfillment](https://docs.stripe.com/checkout/fulfillment), [webhook verification](https://docs.stripe.com/events/manage-webhook-endpoints), and [refunds](https://docs.stripe.com/api/refunds/create).
 
 ## Account email and password recovery
 
@@ -159,9 +180,9 @@ Availability returns eligible `rates` for each room, with `nightlyCents` and `to
 
 ## Next milestones
 
-1. Payment-provider sandbox checkout. Verification/recovery email is implemented with local SMTP capture; durable email delivery and shared rate limits remain production follow-ups. Room type labels and supplemental rate plans are implemented; pooled room-type inventory, seasonal pricing, and different cancellation policies remain future extensions.
-2. Elasticsearch autocomplete, typo tolerance, facets, and natural-language intent parsing.
-3. Availability-aware travel search, larger candidate discovery, caching, and supported transit/combined-mode routing.
+Stripe sandbox checkout, verification/recovery email, and supplemental room rate plans are implemented. Further extensions: payment-required inventory holds, durable payment/email reconciliation, shared rate limits, pooled room-type inventory, seasonal pricing, and different cancellation policies.
+1. Elasticsearch autocomplete, typo tolerance, facets, and natural-language intent parsing.
+2. Availability-aware travel search, larger candidate discovery, caching, and supported transit/combined-mode routing.
 
 Current travel modes are evaluated separately; they are not combined walking-plus-transit journeys.
 

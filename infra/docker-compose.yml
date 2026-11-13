@@ -89,6 +89,8 @@ services:
     environment:
       PORT: 4000
       MAPBOX_TOKEN: ${MAPBOX_TOKEN:-}
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY:-}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET:-}
       MONGO_URL: mongodb://mongo:27017/geobook
       DATABASE_URL: postgres://geobook:geobook@postgres:5432/geobook
       KAFKA_BROKERS: kafka:29092
