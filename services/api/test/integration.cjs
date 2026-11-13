@@ -24,7 +24,8 @@ async function main() {
     await migrate(pg); await migrate(pg); // migration reruns must be safe
     await db.collection('hotels').createIndex({ location: '2dsphere' });
     await seedDemo(pg, mappedMongo);
-    server = createApp(mappedMongo, pg).listen(0, '127.0.0.1');
+    const emails = []; let failMail = false;
+    server = createApp(mappedMongo, pg, async message => { if (failMail) throw new Error('Simulated delivery failure'); emails.push(message); }).listen(0, '127.0.0.1');
     await new Promise(resolve => server.once('listening', resolve));
     const base = 'http://127.0.0.1:' + server.address().port;
     async function call(path, method = 'GET', body, cookie, headers = {}) {
@@ -86,6 +87,31 @@ async function main() {
     const owners = await call('/operator/properties','GET',null,host.cookie); const blockId = owners.body.data[0].rooms[0].blocks[0].id;
     await call('/operator/blocks/' + blockId,'DELETE',null,host.cookie);
     assert.equal((await call('/hotels/' + encodeURIComponent(added.body.id) + '/availability?' + new URLSearchParams(stay))).body.status,'available');
+    // Plans share physical inventory and retain their booked terms after operator edits.
+    const planId = randomUUID();
+    const roomEdit = { name: 'Room 1', capacity: 2, nightlyCents: 10000, roomType: 'King suite', ratePlans: [{ id: planId, name: 'Breakfast stay', additionalNightlyCents: 2500, breakfastIncluded: true, minNights: 2 }] };
+    const roomPath = '/operator/rooms/' + newRoom.body.data.id;
+    assert.equal((await call(roomPath, 'PUT', roomEdit, host.cookie)).status, 200);
+    const rateAvailabilityPath = '/hotels/' + encodeURIComponent(added.body.id) + '/availability?';
+    const rates = (await call(rateAvailabilityPath + new URLSearchParams(stay))).body.rooms[0].rates;
+    assert.equal(rates.length, 2); assert.equal(rates[1].totalCents, 25000);
+    assert.equal((await call(rateAvailabilityPath + new URLSearchParams({ ...stay, checkOut: day(11) }))).body.rooms[0].rates.length, 1);
+    const rateInput = { ...input, hotelId: added.body.id, roomId: newRoom.body.data.id, ratePlanId: planId, expectedTotalCents: 25000, requestKey: randomUUID() };
+    assert.equal((await call('/bookings', 'POST', { ...rateInput, expectedTotalCents: 20000 }, guest)).status, 409);
+    assert.equal((await call('/bookings', 'POST', { ...rateInput, ratePlanId: randomUUID() }, guest)).status, 409);
+    assert.equal((await call('/bookings', 'POST', { ...rateInput, checkOut: day(11), expectedTotalCents: 12500 }, guest)).status, 409);
+    const rateBooking = await call('/bookings', 'POST', rateInput, guest);
+    assert.equal(rateBooking.status, 201, JSON.stringify(rateBooking.body));
+    assert.equal(rateBooking.body.data.room_type, 'King suite');
+    assert.equal(rateBooking.body.data.breakfast_included, true);
+    assert.equal((await call('/bookings', 'POST', { ...rateInput, ratePlanId: 'standard' }, guest)).status, 409);
+    assert.equal((await call('/bookings', 'POST', { ...rateInput, requestKey: randomUUID(), ratePlanId: 'standard', expectedTotalCents: 20000 }, other.cookie)).status, 409);
+    assert.equal((await call(roomPath, 'PUT', { ...roomEdit, roomType: 'Twin', ratePlans: [] }, host.cookie)).status, 200);
+    const rateReplay = await call('/bookings', 'POST', rateInput, guest);
+    assert.equal(rateReplay.status, 200); assert.equal(rateReplay.body.data.rate_plan_name, 'Breakfast stay');
+    assert.equal(rateReplay.body.data.room_type, 'King suite');
+    assert.equal((await call('/bookings/' + rateBooking.body.data.id + '/cancel', 'POST', {}, guest)).status, 200);
+    assert.equal((await call('/bookings', 'POST', { ...rateInput, requestKey: randomUUID() }, guest)).status, 409);
     const pastBooking = await pg.query("INSERT INTO bookings(user_id,hotel_id,room_id,stay,total_cents,hotel_name,room_name,demo) VALUES($1,$2,$3,daterange(CURRENT_DATE-5,CURRENT_DATE-3,'[)'),10000,'Demo','Test room',true) RETURNING id", [registered.body.user.id,id,room.id]);
     assert.equal((await call('/bookings/' + pastBooking.rows[0].id + '/review','POST',{ score: 9, body: 'Completed stay review used for testing.' },guest)).status,201);
     assert.equal((await call('/bookings/' + pastBooking.rows[0].id + '/review','POST',{ score: 9, body: 'Duplicate completed stay review.' },guest)).status,409);
@@ -97,10 +123,55 @@ async function main() {
     assert.equal((await call('/hotels/' + encodeURIComponent(added.body.id))).status,404);
     await call(propertyPath,'PUT',property,host.cookie);
     assert.equal((await call('/hotels/' + encodeURIComponent(added.body.id))).status,404,'operator must not undo moderation');
+    // Account email delivery is captured in memory; no email leaves the test.
+    const recover = await call('/auth/register', 'POST', { ...credentials, email: 'recover@example.test' });
+    const recoverCookie = recover.cookie;
+    const tokenFrom = message => message.text.match(/#\/(?:verify-email|reset-password)\/([a-f0-9]{64})/)[1];
+    async function waitEmail(count) {
+      const deadline = Date.now() + 5000;
+      while (emails.length < count && Date.now() < deadline) await new Promise(resolve => setTimeout(resolve, 20));
+      assert.equal(emails.length, count); return emails[count - 1];
+    }
+    assert.equal((await call('/account/verification-email', 'POST', {}, recoverCookie)).status, 200);
+    const verification = tokenFrom(await waitEmail(1));
+    assert.equal((await pg.query('SELECT token_hash FROM account_tokens WHERE user_id=$1', [recover.body.user.id])).rows.some(r => r.token_hash === verification), false);
+    await call('/account/verification-email', 'POST', {}, recoverCookie);
+    assert.equal(emails.length, 1, 'resend cooldown');
+    assert.equal((await call('/auth/reset-password', 'POST', { token: verification, newPassword: 'ReplacementPassword2027!' })).status, 400);
+    assert.equal((await call('/auth/verify-email', 'POST', { token: verification })).status, 200);
+    assert.equal((await call('/auth/verify-email', 'POST', { token: verification })).status, 400);
+    assert.ok((await call('/auth/me', 'GET', null, recoverCookie)).body.user.email_verified_at);
+    const known = await call('/auth/forgot-password', 'POST', { email: 'recover@example.test' });
+    const unknown = await call('/auth/forgot-password', 'POST', { email: 'missing@example.test' });
+    assert.equal(known.status, 202); assert.deepEqual(known.body, unknown.body);
+    const resetToken = tokenFrom(await waitEmail(2));
+    assert.equal((await call('/auth/reset-password', 'POST', { token: resetToken, newPassword: 'short' })).status, 400);
+    const resetResults = await Promise.all(Array.from({ length: 2 }, () => call('/auth/reset-password', 'POST', { token: resetToken, newPassword: 'ReplacementPassword2027!' })));
+    assert.deepEqual(resetResults.map(r => r.status).sort(), [200, 400]);
+    assert.equal((await call('/auth/me', 'GET', null, recoverCookie)).body.user, null);
+    assert.equal((await call('/auth/login', 'POST', { email: 'recover@example.test', password: credentials.password })).status, 401);
+    assert.equal((await call('/auth/login', 'POST', { email: 'recover@example.test', password: 'ReplacementPassword2027!' })).status, 200);
+    await call('/auth/forgot-password', 'POST', { email: 'recover@example.test' });
+    const expired = tokenFrom(await waitEmail(3));
+    await pg.query("UPDATE account_tokens SET expires_at=now()-interval '1 minute',created_at=now()-interval '2 minutes' WHERE user_id=$1", [recover.body.user.id]);
+    assert.equal((await call('/auth/reset-password', 'POST', { token: expired, newPassword: 'ExpiredPassword2027!' })).status, 400);
+    await call('/auth/forgot-password', 'POST', { email: 'recover@example.test' });
+    const invalidated = tokenFrom(await waitEmail(4));
+    const recoveryLogin = await call('/auth/login', 'POST', { email: 'recover@example.test', password: 'ReplacementPassword2027!' });
+    assert.equal((await call('/account/password', 'POST', { currentPassword: 'ReplacementPassword2027!', newPassword: 'RotatedPassword2027!' }, recoveryLogin.cookie)).status, 200);
+    assert.equal((await call('/auth/reset-password', 'POST', { token: invalidated, newPassword: 'StolenPassword2027!' })).status, 400);
+    failMail = true;
+    assert.equal((await call('/account/verification-email', 'POST', {}, guest)).status, 503);
+    assert.equal((await pg.query('SELECT count(*)::int AS n FROM account_tokens WHERE user_id=$1', [registered.body.user.id])).rows[0].n, 0);
+    failMail = false;
+    assert.equal((await call('/account/verification-email', 'POST', {}, guest)).status, 200);
+    const expiredVerification = tokenFrom(await waitEmail(5));
+    await pg.query("UPDATE account_tokens SET expires_at=now()-interval '1 minute' WHERE user_id=$1", [registered.body.user.id]);
+    assert.equal((await call('/auth/verify-email', 'POST', { token: expiredVerification })).status, 400);
     await call('/account/password','POST',{ currentPassword:credentials.password,newPassword:'ReplacementPassword2027!' },guest);
     assert.equal((await call('/auth/me','GET',null,guest)).body.user,null);
     assert.equal((await call('/auth/login','POST',credentials)).status,401);
-    console.log('PASS: registration, sessions, CSRF, server prices, 8-way booking race, idempotency, cancellation, ownership, blocks, favorites, verified reviews, moderation, password rotation, transactional outbox.');
+    console.log('PASS: registration, sessions, CSRF, server prices, 8-way booking race, idempotency, cancellation, ownership, blocks, favorites, verified reviews, moderation, room rate plans, verification/recovery, expiry/replay, concurrent resets, delivery failure, password rotation, transactional outbox.');
   } finally {
     if (server) await new Promise(resolve => server.close(resolve));
     await pg.end();

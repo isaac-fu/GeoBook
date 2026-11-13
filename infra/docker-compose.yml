@@ -27,6 +27,9 @@ services:
     depends_on:
       api:
         condition: service_healthy
+  mailpit:
+    image: axllent/mailpit:v1.27.4
+    ports: ["127.0.0.1:8025:8025", "127.0.0.1:1025:1025"]
   mongo:
     image: mongo:7
     ports: ["27017:27017"]
@@ -92,6 +95,10 @@ services:
       SEED_DEMO: "true"
       DEMO_PASSWORD: ${DEMO_PASSWORD:-}
       SECURE_COOKIES: "false"
+      PUBLIC_APP_URL: ${PUBLIC_APP_URL:-http://localhost:8080/}
+      SMTP_HOST: mailpit
+      SMTP_PORT: 1025
+      MAIL_FROM: "GeoBook <no-reply@geobook.test>"
     healthcheck:
       test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4000/api/health/ready').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
       interval: 10s

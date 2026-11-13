@@ -16,6 +16,7 @@ docker compose --env-file ../.env up --build -d
 | Hotel operator | http://localhost:8081 |
 | Admin | http://localhost:8082 |
 | API readiness | http://localhost:4000/api/health/ready |
+| Local email inbox | http://localhost:8025 |
 
 Docker installs and builds all frontend, API, and worker dependencies. Nginx provides same-origin API proxying. MongoDB, PostgreSQL/PostGIS, and Kafka use health checks. Kafka uses KRaft, without ZooKeeper. API startup automatically applies additive SQL migrations to existing databases. Keep existing volumes; do not remove them to update the schema.
 
@@ -33,7 +34,7 @@ Set `MAPBOX_TOKEN` in the root `.env` and recreate the API for live travel estim
 
 Startup seeds **Demo Harbor House** (San Francisco) and **Demo Park House** (New York), each with three physical rooms. Reseeding is idempotent. Imported real OSM hotels remain discovery-only without connected supplier inventory.
 
-On port 8081, register an operator account, create a property, and add rooms with capacity and rates. Edit descriptions, amenities, attributed/licensed photo URLs, publication status, room availability blocks, and rates; view your reservations. Each inventory row represents one physical room, not a room-type allocation. Operator-created inventory is also demo inventory.
+On port 8081, register an operator account, create a property, and add rooms with capacity and rates. Edit descriptions, amenities, attributed/licensed photo URLs, publication status, room availability blocks, and rates; view your reservations. Each inventory row represents one physical room, not a room-type allocation. Set a room type (for example, King suite), then edit the room to add up to ten optional rate plans with a nightly supplement, breakfast inclusion, and minimum stay. Room only remains available at the base rate; all demo plans retain free cancellation before check-in. Operator-created inventory is also demo inventory.
 
 To manage the built-in properties, optionally set `DEMO_PASSWORD` (at least 12 characters) **before their first seed**, then sign in as `demo.owner@geobook.test`. Reseeding never resets an existing account's password. Otherwise, register your own operator account and create your own property.
 
@@ -56,13 +57,15 @@ An existing account must supply its matching password before promotion. The admi
 - Hotel profiles, descriptions, amenities, licensed photo attribution, verified-stay reviews, favorites, and checkout.
 - Registration/login/logout, salted scrypt password hashes, hashed server-side sessions, HttpOnly cookies, request-origin checks, password rotation, and role/ownership checks.
 - Transactional bookings with server-calculated prices, room locking, a PostgreSQL overlap exclusion constraint, idempotency keys, and cancellation.
+- Room type labels and per-room rate plans with breakfast, minimum stays, server-calculated supplements, and immutable booked plan details. Plans share the physical room’s inventory.
+- Email verification and password recovery with hashed, expiring single-use tokens, resend cooldowns, and session revocation on password reset.
 - One review per completed confirmed stay.
 - Transactional outbox → Kafka → persistent in-app notifications with duplicate-event protection.
 - Separate guest, operator, and admin applications.
 
 MongoDB stores hotel content and geography. PostgreSQL stores accounts, sessions, rooms, blocks, bookings, favorites, reviews, notifications, and outbox events.
 
-This is a local development MVP. Bookings and prices are demo data; payment processing, taxes, supplier settlement, email verification/recovery, and outbound email/SMS are not implemented. Production needs managed secrets, HTTPS/secure cookies, restricted database access, and durable operations. Compose uses local HTTP and development credentials.
+This is a local development MVP. Bookings and prices are demo data; payment processing, taxes, supplier settlement, outbound booking email/SMS are not implemented. Account verification and password recovery use SMTP with a local Mailpit inbox in Compose. Production needs managed secrets, HTTPS/secure cookies, restricted database access, and durable operations. Compose uses local HTTP and development credentials.
 
 ## Hotel catalog
 
@@ -134,11 +137,29 @@ node --env-file=.env services/api/test/integration.cjs
 node --env-file=.env services/api/test/notifications.cjs
 ```
 
-The first requires PostgreSQL and MongoDB and tests migration reruns, authentication, ownership, an eight-request booking race, idempotency, cancellation, availability blocks, reviews, moderation, and password rotation. The second also requires Kafka and a built worker; it verifies outbox delivery and duplicate handling with an isolated topic/group. Use a local development database account with schema creation permission, never production.
+The first requires PostgreSQL and MongoDB and tests migration reruns, authentication, ownership, an eight-request booking race, idempotency, cancellation, availability blocks, rate-plan pricing/minimum stays/shared inventory, booked-term snapshots, reviews, moderation, password rotation, verification links, recovery expiry/replay, and concurrent password resets. The second also requires Kafka and a built worker; it verifies outbox delivery and duplicate handling with an isolated topic/group. Use a local development database account with schema creation permission, never production.
+
+## Account email and password recovery
+
+Compose captures account emails in [Mailpit](http://localhost:8025); messages are not delivered to external inboxes. After registration, open **Your account → Send verification email**, open the captured message, and confirm the link. Verification records email ownership but does not yet gate demo bookings or operator access. Existing accounts remain usable and initially show unverified.
+
+Use **Forgot password?** in the sign-in dialog, then open the reset link and choose a password of at least 12 characters. Reset links expire after 30 minutes; verification links expire after 24 hours. Both are single-use, and resending after the one-minute cooldown replaces the previous link of that kind. Password reset signs out every existing session. A normal password change also invalidates outstanding reset links.
+
+For host-run development, configure SMTP using the entries in `.env.example` and set `PUBLIC_APP_URL=http://localhost:5173/`. Docker defaults to the guest portal on port 8080. Links use this configured address, never a browser-supplied host; all three portals support the link pages. Host SMTP defaults to localhost:1025. External SMTP can be configured for a host-run API with `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_REQUIRE_TLS`, `SMTP_USER`, `SMTP_PASSWORD`, and `MAIL_FROM`; Compose deliberately routes to Mailpit.
+
+Recovery returns a generic 202 response before looking up the account or delivering mail. Delivery runs in the API process; it is not a durable job queue, and requests interrupted by a restart must be retried. SMTP failures invalidate the undelivered token and log a generic error without credentials or links. Per-IP limits are process-local; production needs shared limits and durable delivery. API tests inject an in-memory mail capture so they never send external email.
+
+Implementation references: [Nodemailer SMTP](https://nodemailer.com/smtp) and [Mailpit Docker setup](https://mailpit.axllent.org/docs/install/docker/).
+
+## Room rates API
+
+Operator room create/update requests accept `roomType` and `ratePlans` (up to ten entries). Each plan has a stable UUID `id`, `name`, integer `additionalNightlyCents` (0–10,000,000), `breakfastIncluded`, and `minNights` (1–90). Updating a room replaces its plan list. The base room-only plan always has ID `standard`.
+
+Availability returns eligible `rates` for each room, with `nightlyCents` and `totalCents`. Send the chosen `ratePlanId` and `expectedTotalCents` when booking; omitting the plan selects `standard` for compatibility. The API checks the plan and price while holding the room lock. Bookings preserve room type, plan name, breakfast, and total even after an operator changes or removes the plan. Existing rooms/bookings receive standard defaults through additive migration `003_room_rates.sql`.
 
 ## Next milestones
 
-1. Payment-provider sandbox checkout, verification/recovery email, and richer room types/rate plans.
+1. Payment-provider sandbox checkout. Verification/recovery email is implemented with local SMTP capture; durable email delivery and shared rate limits remain production follow-ups. Room type labels and supplemental rate plans are implemented; pooled room-type inventory, seasonal pricing, and different cancellation policies remain future extensions.
 2. Elasticsearch autocomplete, typo tolerance, facets, and natural-language intent parsing.
 3. Availability-aware travel search, larger candidate discovery, caching, and supported transit/combined-mode routing.
 

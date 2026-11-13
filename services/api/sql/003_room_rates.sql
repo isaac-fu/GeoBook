@@ -1,0 +1,6 @@
+ALTER TABLE rooms ADD COLUMN IF NOT EXISTS room_type TEXT NOT NULL DEFAULT 'Standard';
+ALTER TABLE rooms ADD COLUMN IF NOT EXISTS rate_plans JSONB NOT NULL DEFAULT '[]'::jsonb CHECK(jsonb_typeof(rate_plans) = 'array');
+ALTER TABLE bookings ADD COLUMN IF NOT EXISTS room_type TEXT NOT NULL DEFAULT 'Standard';
+ALTER TABLE bookings ADD COLUMN IF NOT EXISTS rate_plan_id TEXT NOT NULL DEFAULT 'standard';
+ALTER TABLE bookings ADD COLUMN IF NOT EXISTS rate_plan_name TEXT NOT NULL DEFAULT 'Room only';
+ALTER TABLE bookings ADD COLUMN IF NOT EXISTS breakfast_included BOOLEAN NOT NULL DEFAULT false;

@@ -2,6 +2,7 @@ import express from 'express';
 import type { MongoClient } from 'mongodb';
 import type { Pool } from 'pg';
 import { z } from 'zod';
+import { registerAccountEmail, type AccountMailer } from './account-email.js';
 import { registerAuth } from './auth.js';
 import { registerBookings, staySchema, validStay } from './bookings.js';
 import { registerManagement } from './management.js';
@@ -10,10 +11,11 @@ import { registerTravelSearch } from './travel-search.js';
 import { hotelSearchFilter } from './hotel-search.js';
 import { errors, route } from './http.js';
 
-export function createApp(mongo: MongoClient, pool: Pool) {
+export function createApp(mongo: MongoClient, pool: Pool, mailer?: AccountMailer) {
   const app = express(); app.disable('x-powered-by'); app.use(express.json({ limit: '64kb' }));
   app.get('/health', (_req, res) => { res.json({ ok: true, service: 'geobook-api' }); });
   registerAuth(app, pool);
+  registerAccountEmail(app, pool, mailer);
   registerBookings(app, pool, mongo);
   registerManagement(app, pool, mongo);
   registerHotelProfiles(app, mongo, pool);

@@ -2,6 +2,7 @@ import type { Express } from 'express';
 import type { Pool, PoolClient } from 'pg';
 import type { MongoClient } from 'mongodb';
 import { z } from 'zod';
+import { roomRates } from './room-rates.js';
 import { route, user, HttpError } from './http.js';
 
 const dateSchema = z.string().regex(/^\d{4}-\d{2}-\d{2}$/).refine(value => {
@@ -29,15 +30,15 @@ export async function availability(pool: Pool, hotelId: string, stay: z.infer<ty
     AND NOT EXISTS(SELECT 1 FROM bookings b WHERE b.room_id=r.id::text AND b.status='confirmed' AND b.stay && daterange($2,$3,'[)'))
     AND NOT EXISTS(SELECT 1 FROM room_blocks k WHERE k.room_id=r.id AND k.stay && daterange($2,$3,'[)')) ORDER BY r.nightly_cents,r.id`, [hotelId, stay.checkIn, stay.checkOut, stay.guests]);
   return { status: result.rowCount ? 'available' : 'sold_out', demo: property.rows[0].demo, nights: nights(stay),
-    rooms: result.rows.map(r => ({ ...r, totalCents: r.nightly_cents * nights(stay) })),
+    rooms: result.rows.map(r => ({ ...r, rates: roomRates(r, nights(stay)), totalCents: r.nightly_cents * nights(stay) })),
     message: result.rowCount ? 'Choose a room to review your reservation.' : 'No rooms available for these dates and guests.' };
 }
-const reserveSchema = z.object({ hotelId: z.string().min(1).max(200), roomId: z.uuid(), requestKey: z.uuid(),
+const reserveSchema = z.object({ hotelId: z.string().min(1).max(200), roomId: z.uuid(), ratePlanId: z.union([z.literal('standard'), z.uuid()]).default('standard'), requestKey: z.uuid(),
   checkIn: dateSchema, checkOut: dateSchema, guests: z.number().int().min(1).max(30),
   expectedTotalCents: z.number().int().positive(), guestName: z.string().trim().min(2).max(100), specialRequests: z.string().trim().max(1000).default(''),
 }).refine(s => s.checkOut > s.checkIn, { message: 'Check-out must be after check-in' });
 function replayMatches(booking: any, data: z.infer<typeof reserveSchema>) {
-  if (booking.hotel_id !== data.hotelId || booking.room_id !== data.roomId || booking.check_in !== data.checkIn || booking.check_out !== data.checkOut || booking.guest_count !== data.guests || booking.total_cents !== data.expectedTotalCents || booking.guest_name !== data.guestName || booking.special_requests !== data.specialRequests) {
+  if (booking.rate_plan_id !== data.ratePlanId || booking.hotel_id !== data.hotelId || booking.room_id !== data.roomId || booking.check_in !== data.checkIn || booking.check_out !== data.checkOut || booking.guest_count !== data.guests || booking.total_cents !== data.expectedTotalCents || booking.guest_name !== data.guestName || booking.special_requests !== data.specialRequests) {
     throw new HttpError(409, 'This request key was already used for a different reservation.');
   }
 }
@@ -57,13 +58,15 @@ export function registerBookings(app: Express, pool: Pool, mongo: MongoClient) {
       if (!room || room.capacity < data.guests) throw new HttpError(409, 'This room is unavailable for the selected guests.');
       const replay = await client.query(`${bookingSelect} WHERE b.user_id=$1 AND b.request_key=$2`, [current.id, data.requestKey]);
       if (replay.rowCount) { replayMatches(replay.rows[0], data); await client.query('COMMIT'); res.json({ data: replay.rows[0], replay: true }); return; }
-      const total = room.nightly_cents * nights(data);
+      const rate = roomRates(room, nights(data)).find(p => p.id === data.ratePlanId);
+      if (!rate) throw new HttpError(409, 'This rate plan is no longer available for these dates. Check availability again.');
+      const total = rate.totalCents;
       if (total !== data.expectedTotalCents) throw new HttpError(409, 'The room rate changed. Check availability again.');
       const blocked = await client.query("SELECT 1 FROM room_blocks WHERE room_id=$1 AND stay && daterange($2,$3,'[)')", [data.roomId, data.checkIn, data.checkOut]);
       if (blocked.rowCount) throw new HttpError(409, 'This room is no longer available.');
-      const inserted = await client.query(`INSERT INTO bookings(user_id,hotel_id,room_id,stay,total_cents,request_key,hotel_name,room_name,guest_name,guest_count,special_requests,currency,demo)
-        VALUES($1,$2,$3,daterange($4,$5,'[)'),$6,$7,$8,$9,$10,$11,$12,$13,$14) RETURNING *`,
-        [current.id, data.hotelId, data.roomId, data.checkIn, data.checkOut, total, data.requestKey, hotel.name, room.name, data.guestName, data.guests, data.specialRequests, room.currency, room.demo]);
+      const inserted = await client.query(`INSERT INTO bookings(user_id,hotel_id,room_id,stay,total_cents,request_key,hotel_name,room_name,guest_name,guest_count,special_requests,currency,demo,room_type,rate_plan_id,rate_plan_name,breakfast_included)
+        VALUES($1,$2,$3,daterange($4,$5,'[)'),$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18) RETURNING *`,
+        [current.id, data.hotelId, data.roomId, data.checkIn, data.checkOut, total, data.requestKey, hotel.name, room.name, data.guestName, data.guests, data.specialRequests, room.currency, room.demo, room.room_type, rate.id, rate.name, rate.breakfastIncluded]);
       await emit(client, 'booking.created', inserted.rows[0]);
       booking = (await client.query(`${bookingSelect} WHERE b.id=$1`, [inserted.rows[0].id])).rows[0];
       await client.query('COMMIT');

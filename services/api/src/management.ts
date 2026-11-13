@@ -4,6 +4,7 @@ import type { Pool } from 'pg';
 import type { MongoClient } from 'mongodb';
 import { z } from 'zod';
 import { route, user, HttpError } from './http.js';
+import { roomSchema } from './room-rates.js';
 import { staySchema, validStay, bookingSelect } from './bookings.js';
 
 const detailsSchema = z.object({
@@ -16,7 +17,6 @@ const detailsSchema = z.object({
   images: z.array(z.object({ url: z.url().startsWith('https://'), attribution: z.string().min(1).max(200), license: z.string().min(1).max(100) })).max(10).default([]),
   published: z.boolean().default(true),
 });
-const roomSchema = z.object({ name: z.string().trim().min(1).max(100), capacity: z.number().int().min(1).max(30), nightlyCents: z.number().int().min(100).max(10000000), active: z.boolean().default(true) });
 export function registerManagement(app: Express, pool: Pool, mongo: MongoClient) {
   const hotels = mongo.db('geobook').collection<any>('hotels');
   async function owned(id: string, res: Response) {
@@ -54,12 +54,12 @@ export function registerManagement(app: Express, pool: Pool, mongo: MongoClient)
   }));
   app.post('/api/operator/properties/:id/rooms', route(async (req, res) => {
     await owned(req.params.id, res); const data = roomSchema.parse(req.body);
-    const result = await pool.query('INSERT INTO rooms(hotel_id,name,capacity,nightly_cents,active) VALUES($1,$2,$3,$4,$5) RETURNING *', [req.params.id, data.name, data.capacity, data.nightlyCents, data.active]);
+    const result = await pool.query('INSERT INTO rooms(hotel_id,name,capacity,nightly_cents,active,room_type,rate_plans) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING *', [req.params.id, data.name, data.capacity, data.nightlyCents, data.active, data.roomType, JSON.stringify(data.ratePlans)]);
     await refreshPrice(req.params.id); res.status(201).json({ data: result.rows[0] });
   }));
   app.put('/api/operator/rooms/:id', route(async (req, res) => {
     const current = user(res, ['hotel', 'admin']); const id = z.uuid().parse(req.params.id); const data = roomSchema.parse(req.body);
-    const result = await pool.query('UPDATE rooms r SET name=$1,capacity=$2,nightly_cents=$3,active=$4 FROM properties p WHERE r.hotel_id=p.hotel_id AND p.owner_id=$5 AND r.id=$6 RETURNING r.*', [data.name, data.capacity, data.nightlyCents, data.active, current.id, id]);
+    const result = await pool.query('UPDATE rooms r SET name=$1,capacity=$2,nightly_cents=$3,active=$4,room_type=$7,rate_plans=$8 FROM properties p WHERE r.hotel_id=p.hotel_id AND p.owner_id=$5 AND r.id=$6 RETURNING r.*', [data.name, data.capacity, data.nightlyCents, data.active, current.id, id, data.roomType, JSON.stringify(data.ratePlans)]);
     if (!result.rowCount) throw new HttpError(404, 'Room not found.'); await refreshPrice(result.rows[0].hotel_id); res.json({ ok: true });
   }));
   app.post('/api/operator/rooms/:id/blocks', route(async (req, res) => {

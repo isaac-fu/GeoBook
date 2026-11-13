@@ -1,3 +1,4 @@
+import { AccountEmailPage } from './AccountEmail.jsx';
 import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { SessionProvider, useSession, Gate, useResource, Status, hotelLink } from './client.jsx';
@@ -23,7 +24,8 @@ function App({ portal }) {
   useEffect(() => { const change = () => { setHash(location.hash || '#/'); window.scrollTo(0,0); }; window.addEventListener('hashchange', change); return () => window.removeEventListener('hashchange', change); }, []);
   let parts; try { parts = hash.replace(/^#\/?/, '').split('/').map(decodeURIComponent); } catch { parts = ['missing']; }
   const page = parts[0]; let content;
-  if (page === 'account') content = <Gate><Account/></Gate>;
+  if (['forgot-password', 'reset-password', 'verify-email'].includes(page)) content = <AccountEmailPage key={hash} action={page} token={parts[1]}/>;
+  else if (page === 'account') content = <Gate><Account/></Gate>;
   else if (page === 'notifications') content = <Gate><Notifications/></Gate>;
   else if (portal === 'hotel') content = <Gate roles={['hotel','admin']}><HotelPortal/></Gate>;
   else if (portal === 'admin') content = <Gate roles={['admin']}><AdminPortal/></Gate>;
