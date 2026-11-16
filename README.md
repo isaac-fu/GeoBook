@@ -83,6 +83,70 @@ Fresh region samples support `--osm-region=san-francisco`, `los-angeles`, `san-d
 
 Schemas validate geography, coordinates, nullable rates, descriptions, ratings with provider attribution, amenities, licensed images, and provenance. MongoDB has a 2dsphere index. OSM supplies locations, not live rates, inventory, photographs, or reviews; missing content is labeled. Preserve catalog NOTICE files and attribution to © OpenStreetMap contributors under [ODbL](https://www.openstreetmap.org/copyright). Separate OSM elements may describe the same physical property and require reconciliation.
 
+## Elasticsearch hotel search
+
+The guest destination box now offers autocomplete after two characters, waits 300 ms before requesting suggestions, and cancels stale requests. **Best match** uses typo-tolerant matching, prefix completion, and boosted hotel/place matches. Queries can span fields, such as “Harbor California”. Lowercase and ASCII-folding analysis supports case/accent-insensitive matching. This is text search, not natural-language interpretation of dates, budgets, or journey constraints.
+
+```mermaid
+flowchart LR
+  M[(MongoDB hotel catalog)] -->|scan every minute| I[Search indexer]
+  I -->|build and validate snapshot| E[(Elasticsearch)]
+  G[Guest destination search] --> A[API]
+  A -->|current visibility and price eligibility| M
+  A -->|date and guest availability| P[(PostgreSQL)]
+  A -->|rank eligible hotel IDs| E
+  E -->|ordered IDs| A
+  A -->|read current hotel details| M
+  A --> G
+```
+
+MongoDB remains the hotel source of truth. Elasticsearch contains only public searchable names/geography, hotel IDs, and starting prices, not accounts, bookings, images, or payment data. PostgreSQL continues to decide room availability; Elasticsearch never confirms a reservation.
+
+### Start and rebuild
+
+From `infra`, run:
+
+```powershell
+docker compose --env-file ../.env up --build -d
+docker compose logs --tail=50 search-indexer
+```
+
+Compose starts Elasticsearch and a separate `search-indexer` process using the API image. Initial indexing runs once the API and Elasticsearch are ready. Normal searches fall back to MongoDB until the first index is available. Re-run a sync immediately after a catalog import if you do not want to wait for the next scheduled scan:
+
+```powershell
+docker compose exec search-indexer node dist/search-indexer.js --once
+```
+
+The indexer scans MongoDB in stable ID order and hashes the searchable fields. An unchanged catalog needs no writes to Elasticsearch. For a change it creates a fresh versioned index, submits batches of 500 hotels, checks bulk failures, refreshes the index, and verifies its document count. Only then does it atomically switch the `geobook-hotels` alias. A failed build leaves the old alias untouched; a PostgreSQL advisory lock prevents concurrent indexers from racing. Successful rebuilds keep the current and previous snapshots and remove older snapshots generated in this namespace. Failed snapshots are cleaned up on a later successful rebuild.
+
+Imports, operator updates, visibility changes, price changes, and deletions are discovered on the next scan. This deliberately uses periodic reconciliation rather than Kafka/change streams: MongoDB is standalone in the current Compose setup, and direct imports do not produce Kafka catalog events. Kafka remains responsible for booking notifications. A future incremental indexer can use a transactional event/change-stream pipeline while retaining this rebuild path.
+
+### Query process and failure behavior
+
+1. Validate the destination, dates, guest count, sort order, and price range.
+2. Read eligible active hotel IDs from MongoDB, intersecting PostgreSQL availability when dates are provided.
+3. Send those IDs as a filter with fuzzy/prefix text queries to Elasticsearch. No raw query-string syntax from the browser is executed.
+4. Read current hotel documents from MongoDB in the returned ranking order and recheck visibility/price filters.
+5. Return 20 results per page with `meta.searchEngine` and `meta.degraded`. Missing/unavailable indices, timed-out or incomplete search results fall back to the existing literal MongoDB search; the UI explains the reduced matching behavior.
+
+New hotels, renamed destinations, and price **ordering** can lag by one scan plus indexing time. Current displayed prices and price eligibility are checked against MongoDB, and booking prices/availability are revalidated transactionally at checkout. A concurrent change can shorten an already-selected results page. This first implementation supports up to 60,000 active hotels and pages 1–500 (Elasticsearch's 10,000-hit window); exceeding the candidate bound uses the basic-search fallback. For a larger catalog, replace full eligibility lists/snapshots with incremental indexing and cursor pagination.
+
+For host-run development, set `ELASTICSEARCH_URL=http://localhost:9200`, `ELASTICSEARCH_INDEX=geobook-hotels`, and run `node --env-file=.env services/api/dist/search-indexer.js` alongside the API. Omitting `ELASTICSEARCH_URL` retains MongoDB-only search. The REST adapter uses Node fetch, bounded requests, and optional `ELASTICSEARCH_API_KEY`; no search credentials reach the browser.
+
+Elasticsearch's Compose service has a 1 GB memory limit and publishes port 9200 on loopback only. Its unauthenticated single-node configuration is for local development; remote deployments must configure Elasticsearch authentication/TLS and separate read/indexing permissions. The default health check allows yellow because there is only one node.
+
+### Verify
+
+`npm run build` and `npm --workspace services/api test` cover compilation, safe query construction, privacy projection, failed-index retention, live-data hydration, and API fallback. With Elasticsearch running, execute the real-engine smoke suite from `infra`:
+
+```powershell
+docker compose exec api node test/search-integration.cjs
+```
+
+It creates an isolated random test alias, exercises typo/prefix/accent matching, geographic search, sorting, eligibility, deletion, and atomic replacement, then removes its own indices. It uses fixture MongoDB/PostgreSQL adapters, so it does not change application catalog or booking data. The suite requires Elasticsearch but no Stripe credentials.
+
+Implementation references: [search-as-you-type mappings](https://www.elastic.co/docs/reference/elasticsearch/mapping-reference/search-as-you-type), [multi-match queries](https://www.elastic.co/docs/reference/query-languages/query-dsl/query-dsl-multi-match-query), and [atomic alias changes](https://www.elastic.co/docs/manage-data/data-store/aliases).
+
 ## Travel UI
 
 Open **Explore travel times** on a hotel profile. The map supports anchor selection, coordinates, budgets, walking/cycling/driving modes, any/all matching, distance/time ranking, and nested shaded isochrone polygons with minute labels. Layer toggles do not request new routes. Changing criteria clears stale results. Enable unpriced hotels to include OSM listings. Live estimates require Mapbox and are never fabricated.
@@ -147,7 +211,7 @@ After confirming a demo reservation, open **My bookings → Open Stripe test che
 2. Forward sandbox events with the Stripe CLI:
 
    ```powershell
-   stripe listen --events checkout.session.completed,checkout.session.expired,checkout.session.async_payment_succeeded --forward-to localhost:4000/api/payments/webhook
+   stripe listen --events checkout.session.completed,checkout.session.expired,checkout.session.async_payment_succeeded,checkout.session.async_payment_failed --forward-to localhost:4000/api/payments/webhook
    ```
 
 3. Set `STRIPE_WEBHOOK_SECRET` to the listener's signing secret and restart/recreate the API. Keep both credentials server-side. `PUBLIC_APP_URL` controls the return destination (port 8080 for Docker, 5173 for Vite).
@@ -159,6 +223,22 @@ The API charges the saved server-calculated total, verifies raw-body webhook sig
 Sandbox checkout is disabled without credentials. Integration tests use an injected fake provider and signed test webhooks; they exercise lost responses, concurrent creation, mismatched amounts, invalid signatures, refunds, and cancellation failures without contacting Stripe. Hosted checkout still requires a manual sandbox run with your credentials. Durable reconciliation jobs, dashboard-initiated refund synchronization, payment-required inventory holds, taxes, and production payments remain future work.
 
 Provider references: [Checkout fulfillment](https://docs.stripe.com/checkout/fulfillment), [webhook verification](https://docs.stripe.com/events/manage-webhook-endpoints), and [refunds](https://docs.stripe.com/api/refunds/create).
+
+### Payment security and recovery
+
+Webhook receipts are committed in PostgreSQL together with payment updates. Concurrent deliveries of the same event are processed once; unsuccessful processing rolls back the receipt so Stripe can retry. Signed but unrelated Checkout events are acknowledged without changing bookings. Direct-account test events only are accepted; live and Connect events are rejected. Raw-body signature verification includes the Stripe SDK's timestamp tolerance. Redirects are restricted to HTTPS on `checkout.stripe.com`.
+
+A webhook arriving after a lost checkout response can recover the session through the original persisted idempotency key, without requiring the guest to click again. Unresolved intents older than 23 hours still require operator reconciliation; do not delete them or replace the key blindly. Event receipt rows contain identifiers/timestamps only, not full payment payloads.
+
+Cancellation checks the complete paginated refund history (up to 1,000 refunds, then stops for reconciliation), counts successful refund amounts including manual refunds, and requests only the outstanding balance. A partial refund with matching metadata is not treated as a full refund. Pending refunds prevent room release; failed/cancelled GeoBook refunds require operator reconciliation. A lost successful refund response is recovered from provider history on retry. Cancellation does not commit until the full amount has been refunded or unpaid checkout has been closed. Pending cancellation/refund retries are currently initiated by the guest or operator, not a background job.
+
+Run the PostgreSQL-only regression suite after building the API:
+
+```powershell
+node --env-file=.env services/api/test/payments-integration.cjs
+```
+
+It creates and removes a randomly named test schema and uses an injected Stripe fake, exercising concurrent delivery/checkout, signature rejection, failed transaction retries, lost provider responses, partial/pending refunds, unpaid expiry, and the idempotency retention cutoff. No Stripe credentials or MongoDB are needed. Use a development database with schema creation permission. This does not replace a manual Stripe sandbox checkout/webhook test before deployment.
 
 ## Account email and password recovery
 
@@ -181,7 +261,7 @@ Availability returns eligible `rates` for each room, with `nightlyCents` and `to
 ## Next milestones
 
 Stripe sandbox checkout, verification/recovery email, and supplemental room rate plans are implemented. Further extensions: payment-required inventory holds, durable payment/email reconciliation, shared rate limits, pooled room-type inventory, seasonal pricing, and different cancellation policies.
-1. Elasticsearch autocomplete, typo tolerance, facets, and natural-language intent parsing.
+1. Search facets and natural-language intent parsing (Elasticsearch autocomplete, typo tolerance, and relevance ranking are implemented).
 2. Availability-aware travel search, larger candidate discovery, caching, and supported transit/combined-mode routing.
 
 Current travel modes are evaluated separately; they are not combined walking-plus-transit journeys.

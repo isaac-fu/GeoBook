@@ -38,7 +38,7 @@ async function main() {
       expire: async id => { const s = [...sessions.values()].find(s => s.id === id); if(s.status !== 'open') throw Error('Already completed'); s.status = 'expired'; return s; },
     } }, refunds: {
       list: async ({payment_intent}) => ({ data: refunds.filter(r => r.payment_intent === payment_intent) }),
-      create: async data => { if (failRefund) throw Error('Simulated refund failure'); const refund = { ...data, id: 're_' + randomUUID(), status: 'succeeded' }; refunds.push(refund); return refund; },
+      create: async data => { if (failRefund) throw Error('Simulated refund failure'); const refund = { ...data, currency: 'usd', id: 're_' + randomUUID(), status: 'succeeded' }; refunds.push(refund); return refund; },
     } };
     const emails = []; let failMail = false;
     server = createApp(mappedMongo, pg, async message => { if (failMail) throw new Error('Simulated delivery failure'); emails.push(message); }, fakeStripe).listen(0, '127.0.0.1');
@@ -85,33 +85,47 @@ async function main() {
     assert.equal(sessions.size, 1);
     const paymentSession = [...sessions.values()][0];
     assert.equal(paymentSession.amount_total, winner.total_cents);
-    async function webhook(session, type = 'checkout.session.completed', valid = true) {
-      const payload = JSON.stringify({ id: 'evt_' + randomUUID(), type, livemode: false, data: { object: session } });
-      const signature = stripeSdk.webhooks.generateTestHeaderString({ payload, secret: valid ? process.env.STRIPE_WEBHOOK_SECRET : 'wrong' });
+    async function webhook(session, type = 'checkout.session.completed', valid = true, eventId = 'evt_' + randomUUID(), timestamp = Math.floor(Date.now() / 1000)) {
+      const payload = JSON.stringify({ id: eventId, type, livemode: false, data: { object: session } });
+      const signature = stripeSdk.webhooks.generateTestHeaderString({ payload, secret: valid ? process.env.STRIPE_WEBHOOK_SECRET : 'wrong', timestamp });
       const response = await fetch(base + '/api/payments/webhook', { method: 'POST', headers: { 'Content-Type': 'application/json', 'stripe-signature': signature }, body: payload });
       return response.status;
     }
     assert.equal(await webhook(paymentSession, undefined, false), 400);
+    assert.equal(await webhook(paymentSession, undefined, true, 'evt_old_signature', 1), 400);
+    assert.equal(await webhook({ ...paymentSession, id: 'cs_unrelated', client_reference_id: randomUUID() }), 200);
     paymentSession.payment_status = 'paid'; paymentSession.status = 'complete';
     paymentSession.amount_total++;
-    assert.equal(await webhook(paymentSession), 409);
+    const retriedEvent = 'evt_' + randomUUID();
+    assert.equal(await webhook(paymentSession, undefined, true, retriedEvent), 409);
+    assert.equal((await pg.query('SELECT 1 FROM payment_webhook_receipts WHERE event_id=$1', [retriedEvent])).rowCount, 0);
     paymentSession.amount_total--;
-    assert.equal(await webhook(paymentSession), 200);
+    // Simulate a lost local session-id commit: the persisted intent recovers it with Stripe's creation key.
+    await pg.query('UPDATE sandbox_payments SET session_id=NULL WHERE booking_id=$1', [winner.id]);
+    assert.deepEqual(await Promise.all(Array.from({ length: 4 }, () => webhook(paymentSession, undefined, true, retriedEvent))), [200,200,200,200]);
+    assert.equal((await pg.query('SELECT 1 FROM payment_webhook_receipts WHERE event_id=$1', [retriedEvent])).rowCount, 1);
+    assert.equal(sessions.size, 1);
     assert.equal(await webhook(paymentSession, 'checkout.session.expired'), 200, 'old events use current provider state');
     assert.equal((await pg.query('SELECT status FROM sandbox_payments WHERE booking_id=$1', [winner.id])).rows[0].status, 'paid');
     failRefund = true;
     assert.equal((await call('/bookings/' + winner.id + '/cancel', 'POST', {}, ownerCookie)).status, 500);
     assert.equal((await pg.query('SELECT status FROM bookings WHERE id=$1', [winner.id])).rows[0].status, 'confirmed');
     failRefund = false;
+    // A manual partial refund must not be mistaken for a full refund, even with matching metadata.
+    refunds.push({ id: 're_manual', payment_intent: paymentSession.payment_intent, amount: 1000, currency: 'usd', status: 'pending', metadata: { bookingId: winner.id } });
+    assert.equal((await call('/bookings/' + winner.id + '/cancel', 'POST', {}, ownerCookie)).status, 503);
+    assert.equal((await pg.query('SELECT status FROM bookings WHERE id=$1', [winner.id])).rows[0].status, 'confirmed');
+    refunds[0].status = 'succeeded';
 
     const replay = await call('/bookings','POST',{ ...input, requestKey: winner.request_key },ownerCookie);
     assert.equal(replay.status, 200); assert.equal(replay.body.data.id, winner.id);
     assert.equal((await call('/bookings','POST',{ ...input, requestKey: winner.request_key, guests: 1 },ownerCookie)).status,409);
     assert.equal((await call('/bookings/' + winner.id + '/review','POST',{ score: 9, body: 'A wonderful stay for testing.' },ownerCookie)).status,403);
     assert.equal((await call('/bookings/' + winner.id + '/cancel','POST',{},ownerCookie)).status,200);
-    assert.equal(refunds.length, 1);
+    assert.equal(refunds.length, 2);
+    assert.equal(refunds[1].amount, winner.total_cents - 1000);
     assert.equal(await webhook(paymentSession), 200);
-    assert.equal(refunds.length, 1);
+    assert.equal(refunds.length, 2);
     assert.equal((await pg.query('SELECT status FROM sandbox_payments WHERE booking_id=$1', [winner.id])).rows[0].status, 'refunded');
     assert.equal((await call(checkoutPath, 'POST', {}, ownerCookie)).status, 404);
 

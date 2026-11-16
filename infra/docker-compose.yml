@@ -27,6 +27,38 @@ services:
     depends_on:
       api:
         condition: service_healthy
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.19.25
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: "false"
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+    # Unauthenticated local development node; never expose this port publicly.
+    ports: ["127.0.0.1:9200:9200"]
+    volumes: ["elasticsearch-data:/usr/share/elasticsearch/data"]
+    mem_limit: 1g
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS 'http://localhost:9200/_cluster/health?wait_for_status=yellow&timeout=5s' >/dev/null"]
+      interval: 10s
+      timeout: 8s
+      retries: 20
+      start_period: 30s
+  search-indexer:
+    build:
+      context: ..
+      dockerfile: services/api/Dockerfile
+    command: ["node", "dist/search-indexer.js"]
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+      api:
+        condition: service_healthy
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+      ELASTICSEARCH_INDEX: geobook-hotels
+      MONGO_URL: mongodb://mongo:27017/geobook
+      DATABASE_URL: postgres://geobook:geobook@postgres:5432/geobook
+    restart: on-failure
   mailpit:
     image: axllent/mailpit:v1.27.4
     ports: ["127.0.0.1:8025:8025", "127.0.0.1:1025:1025"]
@@ -88,6 +120,8 @@ services:
     ports: ["4000:4000"]
     environment:
       PORT: 4000
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+      ELASTICSEARCH_INDEX: geobook-hotels
       MAPBOX_TOKEN: ${MAPBOX_TOKEN:-}
       STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY:-}
       STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET:-}
@@ -123,3 +157,4 @@ services:
 volumes:
   mongo-data:
   postgres-data:
+  elasticsearch-data:

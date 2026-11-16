@@ -11,10 +11,31 @@ export function sandboxStripe(key = process.env.STRIPE_SECRET_KEY): Stripe | und
   return new Stripe(key, { timeout: 10000, maxNetworkRetries: 1 });
 }
 export function validateSession(session: Stripe.Checkout.Session, booking: any) {
-  if (session.livemode || session.mode !== 'payment' || session.client_reference_id !== booking.id ||
+  if (session.livemode !== false || session.mode !== 'payment' || session.client_reference_id !== booking.id ||
       session.amount_total !== booking.total_cents || session.currency !== booking.currency.toLowerCase()) {
     throw new HttpError(409, 'Sandbox payment does not match this reservation.');
   }
+}
+export function refundBalance(refunds: Stripe.Refund[], intent: string, booking: any) {
+  let refunded = 0;
+  for (const refund of refunds) {
+    const paymentIntent = typeof refund.payment_intent === 'string' ? refund.payment_intent : refund.payment_intent?.id;
+    if (paymentIntent !== intent || refund.currency !== booking.currency.toLowerCase() ||
+        !Number.isSafeInteger(refund.amount) || refund.amount <= 0) throw new HttpError(409, 'Refund details do not match this reservation.');
+    if (refund.status === 'succeeded') refunded += refund.amount;
+    else if (refund.status !== 'failed' && refund.status !== 'canceled') throw new HttpError(503, 'Sandbox refund is still pending. Retry cancellation later.');
+    else if (refund.metadata?.bookingId === booking.id) throw new HttpError(503, 'Sandbox refund failed or was cancelled; operator reconciliation is required.');
+  }
+  if (refunded > booking.total_cents) throw new HttpError(409, 'Refund total exceeds the reservation total.');
+  return booking.total_cents - refunded;
+}
+export function checkoutUrl(value: string | null) {
+  if (!value) throw new HttpError(503, 'Checkout URL is unavailable.');
+  const url = new URL(value);
+  if (url.protocol !== 'https:' || url.hostname !== 'checkout.stripe.com' || url.port || url.username || url.password) {
+    throw new HttpError(503, 'Unexpected checkout destination.');
+  }
+  return url.toString();
 }
 export function payments(pool: Pool, stripe: Stripe | undefined = sandboxStripe()) {
   const base = new URL(process.env.PUBLIC_APP_URL || 'http://localhost:8080/');
@@ -50,10 +71,23 @@ export function payments(pool: Pool, stripe: Stripe | undefined = sandboxStripe(
     if (cancel && status === 'paid') {
       const intent = typeof current.payment_intent === 'string' ? current.payment_intent : current.payment_intent?.id;
       if (!intent) throw new HttpError(503, 'Sandbox refund is awaiting payment details.');
-      const existing = await provider().refunds.list({ payment_intent: intent, limit: 100 });
-      const refund = existing.data.find(r => r.metadata?.bookingId === booking.id) ??
-        await provider().refunds.create({ payment_intent: intent, metadata: { bookingId: booking.id } }, { idempotencyKey: `geobook-refund-${booking.id}` });
-      if (refund.status !== 'succeeded') throw new HttpError(503, 'Sandbox refund is not complete. Retry cancellation later.');
+      const existing: Stripe.Refund[] = [];
+      let cursor: string | undefined;
+      for (let page = 0; ; page++) {
+        if (page === 10) throw new HttpError(503, 'Refund history requires operator reconciliation.');
+        const batch = await provider().refunds.list({ payment_intent: intent, limit: 100, ...(cursor ? { starting_after: cursor } : {}) });
+        existing.push(...batch.data);
+        if (!batch.has_more) break;
+        const next = batch.data.at(-1)?.id;
+        if (!next || next === cursor) throw new HttpError(503, 'Refund history is incomplete.');
+        cursor = next;
+      }
+      const remaining = refundBalance(existing, intent, booking);
+      if (remaining > 0) {
+        // Metadata alone is not proof of a full refund; account for manual/partial refunds too.
+        const refund = await provider().refunds.create({ payment_intent: intent, amount: remaining, metadata: { bookingId: booking.id } }, { idempotencyKey: `geobook-refund-${booking.id}` });
+        if (refundBalance([refund], intent, { ...booking, total_cents: remaining }) !== 0) throw new HttpError(503, 'Sandbox refund is incomplete; operator reconciliation is required.');
+      }
       status = 'refunded';
     } else if (cancel && current.status === 'complete' && status === 'pending') {
       throw new HttpError(503, 'Sandbox payment is still processing. Retry cancellation later.');
@@ -69,17 +103,31 @@ export function payments(pool: Pool, stripe: Stripe | undefined = sandboxStripe(
   }
   function webhook(app: Express) {
     app.post('/api/payments/webhook', express.raw({ type: 'application/json', limit: '256kb' }), route(async (req, res) => {
+      const api = provider();
       let event: Stripe.Event;
-      try { event = provider().webhooks.constructEvent(req.body, req.get('stripe-signature') || '', process.env.STRIPE_WEBHOOK_SECRET || ''); }
+      try { event = api.webhooks.constructEvent(req.body, req.get('stripe-signature') || '', process.env.STRIPE_WEBHOOK_SECRET || ''); }
       catch { throw new HttpError(400, 'Invalid payment webhook.'); }
-      if (event.livemode) throw new HttpError(400, 'Live payments are not supported.');
-      if (!['checkout.session.completed', 'checkout.session.expired', 'checkout.session.async_payment_succeeded'].includes(event.type)) { res.json({ received: true }); return; }
+      if (event.livemode !== false || event.account) throw new HttpError(400, 'Only direct-account sandbox events are supported.');
+      if (!['checkout.session.completed', 'checkout.session.expired', 'checkout.session.async_payment_succeeded', 'checkout.session.async_payment_failed'].includes(event.type)) { res.json({ received: true }); return; }
+      if (!event.id || typeof event.id !== 'string') throw new HttpError(400, 'Missing event identifier.');
       const incoming = event.data.object as Stripe.Checkout.Session;
       const client = await pool.connect();
       try {
         await client.query('BEGIN');
-        const result = await client.query('SELECT b.* FROM bookings b JOIN sandbox_payments p ON p.booking_id=b.id WHERE p.session_id=$1 FOR UPDATE OF b', [incoming.id]);
-        if (!result.rowCount) throw new HttpError(503, 'Checkout is not recorded yet. Retry this event.');
+        await client.query("SET LOCAL lock_timeout = '5s'");
+        const receipt = await client.query('INSERT INTO payment_webhook_receipts(event_id) VALUES($1) ON CONFLICT DO NOTHING RETURNING event_id', [event.id]);
+        if (!receipt.rowCount) { await client.query('COMMIT'); res.json({ received: true }); return; }
+        let result = await client.query('SELECT b.* FROM bookings b JOIN sandbox_payments p ON p.booking_id=b.id WHERE p.session_id=$1 FOR UPDATE OF b', [incoming.id]);
+        if (!result.rowCount) {
+          const reference = z.uuid().safeParse(incoming.client_reference_id);
+          if (reference.success) {
+            result = await client.query('SELECT b.* FROM bookings b JOIN sandbox_payments p ON p.booking_id=b.id WHERE b.id=$1 AND p.session_id IS NULL FOR UPDATE OF b', [reference.data]);
+          }
+          if (!result.rowCount) { await client.query('COMMIT'); res.json({ received: true }); return; }
+          const payment = (await client.query('SELECT * FROM sandbox_payments WHERE booking_id=$1', [result.rows[0].id])).rows[0];
+          const recovered = await session(client, result.rows[0], payment);
+          if (recovered.id !== incoming.id) throw new HttpError(409, 'Checkout does not match the recorded payment intent.');
+        }
         // Retrieve authoritative state so duplicate or reordered events are harmless.
         const current = await provider().checkout.sessions.retrieve(incoming.id);
         await sync(client, result.rows[0], current, result.rows[0].status === 'cancelled');
@@ -107,7 +155,7 @@ export function payments(pool: Pool, stripe: Stripe | undefined = sandboxStripe(
         const checkout = await session(client, booking, payment);
         const status = await sync(client, booking, checkout, false);
         await client.query('COMMIT');
-        res.json({ status, url: status === 'pending' && checkout.status === 'open' ? checkout.url : null });
+        res.json({ status, url: status === 'pending' && checkout.status === 'open' ? checkoutUrl(checkout.url) : null });
       } catch (e) { await client.query('ROLLBACK'); throw e; } finally { client.release(); }
     }));
   }
